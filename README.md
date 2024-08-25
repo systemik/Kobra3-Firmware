@@ -31,7 +31,7 @@ The resulting file must be named **update.swu**
 
 Once done, you should go to your usb stick and create a folder called "**udisk_upgradation**" and put the **update.swu** file in it.
 
-Plug the stick, boot the printer. It should do a single bip and the update should be ok.
+Plug the stick, boot the printer. It should do a single bip and the update should be ok. It may take a bit of time the first time as it needs to create ssh keys on the printer.
 
 Test if you can connect via SSH again.
 
