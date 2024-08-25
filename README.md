@@ -58,3 +58,13 @@ If you prefer, you can try to start adb again with this in the **update.sh** fil
 10) boot printer with the stick, or insert the stick after printer is booted (if update works, you should hear a long bip)
 11) reboot the printer
 12) test ADB access
+
+
+**Windows command lines to create the proper structure for the usb stick :**
+
+    tar -cvzf setup.tar.gz update.sh openssh
+    mkdir update_swu
+    move setup.tar.gz update_swu
+    zip -P U2FsdGVkX19deTfqpXHZnB5GeyQ/dtlbHjkUnwgCi+w= -r update.swu update_swu
+    mkdir udisk_upgradation
+    move update.swu udisk_upgradation
