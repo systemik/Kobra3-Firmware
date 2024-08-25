@@ -11,12 +11,13 @@ You can put whatever you want (at your onwn risk) in the script file.
 
 ~~To enable back **ADB**, you can put this in the file :~~
 
-~~    echo "usb_adb_en" > /tmp/.usb_config~~
+~~echo "usb_adb_en" > /tmp/.usb_config~~
 
 ~~This is a config file that is used when the printer start. The init script located in /etc/init.d/S50usbdevice will read this and then enable the adb deamon at start.~~
 
 ADB is not really required and it is preferable to activate back openssh.
-For this, you need to copy back the openssh lib which has been deleted with trecent firmware and then start openssh server.
+For this, you need to copy back the openssh lib which has been deleted with recent firmware and then start openssh server. 
+I've create an updated version of the openssh lib so it can run in the useremain directory and not be deleted with next firmware update.
 
 You then need to **tar/gzip** this file. The resulting file must be called "**setup.tar.gz**".
 
