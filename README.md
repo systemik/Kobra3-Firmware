@@ -9,11 +9,14 @@ Kobra3 Firmware information and How to update Kobra3 Firmware via USB
 You need to create a file called "**update.sh**"
 You can put whatever you want (at your onwn risk) in the script file.
 
-To enable back **ADB**, you can put this in the file :
+~~To enable back **ADB**, you can put this in the file :~~
 
-    echo "usb_adb_en" > /tmp/.usb_config
+~~    echo "usb_adb_en" > /tmp/.usb_config~~
 
-This is a config file that is used when the printer start. The init script located in /etc/init.d/S50usbdevice will read this and then enable the adb deamon at start.
+~~This is a config file that is used when the printer start. The init script located in /etc/init.d/S50usbdevice will read this and then enable the adb deamon at start.~~
+
+ADB is not really required and it is preferable to activate back openssh.
+For this, you need to copy back the openssh lib which has been deleted with trecent firmware and then start openssh server.
 
 You then need to **tar/gzip** this file. The resulting file must be called "**setup.tar.gz**".
 
@@ -29,9 +32,9 @@ Once done, you should go to your usb stick and create a folder called "**udisk_u
 
 Plug the stick, boot the printer. It should do a single bip and the update should be ok.
 
-Test if you can connect via ADB again. (not 100% sure if this require another reboot before being active. 
+Test if you can connect via SSH again.
 
-If you prefer, you can just put this in the **update.sh** file :
+If you prefer, you can try to start adb again with this in the **update.sh** file (not tested):
 
 
     mkdir /dev/usb-ffs/adb -m 0770
