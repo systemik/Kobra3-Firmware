@@ -17,7 +17,7 @@ You can put whatever you want (at your onwn risk) in the script file.
 
 ADB is not really required and it is preferable to activate back openssh.
 For this, you need to copy back the openssh lib which has been deleted with recent firmware and then start openssh server. 
-I've create an updated version of the openssh lib so it can run in the useremain directory and not be deleted with next firmware update.
+I've create an updated version of the openssh lib so it can run in the useremain directory and not be deleted with next firmware update. The new ssh server run on **port 2222**
 
 You then need to **tar/gzip** this file. The resulting file must be called "**setup.tar.gz**".
 
@@ -33,7 +33,7 @@ Once done, you should go to your usb stick and create a folder called "**udisk_u
 
 Plug the stick, boot the printer. It should do a single bip and the update should be ok. It may take a bit of time the first time as it needs to create ssh keys on the printer.
 
-Test if you can connect via SSH again.
+Test if you can connect via SSH again. (**port 2222**)
 
 If you prefer, you can try to start adb again with this in the **update.sh** file (not tested):
 
@@ -57,7 +57,7 @@ If you prefer, you can try to start adb again with this in the **update.sh** fil
 9) put the file update.swu in udisk_upgradation
 10) boot printer with the stick, or insert the stick after printer is booted (if update works, you should hear a long bip)
 11) reboot the printer
-12) test ADB access
+12) test ssh access port 2222 (or adb)
 
 
 **Windows command lines to create the proper structure for the usb stick :**
