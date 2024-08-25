@@ -1,0 +1,116 @@
+**********************************************
+August 21st
+**********************************************
+
+
+Some "technical" info about the printer.
+
+Android application is using certificate pinning. This can be bypassed. (I'll not explain how to do it. Google is your friend)
+We can use a proxy to sniff traffic after removing the pinning.
+Most traffic from application is sent to cloud-universe.anycubic.com
+No traffic from Mobile to Printer in direct.
+All screen tap are sent to the cloud as well (analytics surely)
+File upload is sending gcode content to AWS s3 bucket. (workbentch.s3.us-east-2.amazonaws.com) (e.g. anycubic have access to all customer files)
+
+New version of the slicer can be easily sniffed (no pinning on this one)
+
+For the printer part:
+
+Example of OTA firmware update json:
+
+{"type":"ota","action":"reportVersion","msgid":"xxx","data":{"id":90,"model_id":20024,"machine_version":"1.1.0","peripheral_version":"","firmware_name":"k3-1.1.0-2.3.3.1-update.swu","firmware_version":"2.3.3.1 ","firmware_url":"https://cdn.cloud-universe.anycubic.com/attachment/1823263180633739265_l5fmjrss.swu","firmware_size":162339350,"firmware_md5":"b4fa7ce85a6c7899ed799d2c22b3e5bf","parent_id":0,"force_update":true,"time_cost":100,"update_desc":"1. Optimized the model list page; \n2. Restructured the settings module; \n3. Added a startup self-diagnosis function; \n4. Optimized the resonance time; \n5. Optimized the color mapping; \n6. Fixed some bugs ;","create_date":1723534995,"min_model_firmware_id":0,"not_support_function":""},"timestamp":1724584562174}
+
+The firmware update file is about 158MB and is downloaded directly to the printer (no download to the mobile phone). The firmware URL is in the json above.
+The firmware setup.tar.gz file inside the zip is encrypted (password).
+The password of the firmware zip is: U2FsdGVkX19deTfqpXHZnB5GeyQ/dtlbHjkUnwgCi+w=
+
+Based on this, some people with more time than me can check its operation.
+
+Update script is called channel.sh (in userdata directory)
+
+The root password is: rockchip.
+
+What could be interesting:
+
+injecting things into the file, like putting adb back so we can always access the printer that way or enabling ssh on boot or changing the listening port/address of some services (some are bound to 127.0.0.1 and I'm pretty sure opening to the printer IP or 0.0.0.0 would allow using the API locally without the cloud. (port 18086 could be interesting)
+Maybe there is a function that would take data from the USB on boot or firmware install to do stuff (they might have some kind of local recovery available if something goes wrong with the printer and it can't connect to the cloud anymore.
+What we could try:
+
+-put the printer through a proxy to sniff the printer traffic.
+
+-see what's happening on bluetooth. (UART seems attached to Bluetooth and may provide serial access.
+
+-see if we can add the missing binaries to use the touchscreen in command line (like command input). The touch screen is here Connected device: input0 Xptek xpt7603 TouchScreen
+
+One option exists but is disabled on the touchscreen about LAN. Here is what we can extract from the binaries for this option :
+
+Enabling the LAN only mode prohibits account binding
+
+LAN only mode
+
+Enabling this mode will shut down the cloud service; Please use Anycubic Slicer for LAN controlled printing.
+
+Few lines of dmesg about the card and cpu :
+
+[ 0.000000] Booting Linux on physical CPU 0x0
+[ 0.000000] Linux version 5.10.160 (root@e64212b7a1cb) (arm-rockchip830-linux-uclibcgnueabihf-gcc (crosstool-NG 1.24.0) 8.3.0, GNU ld (crosstool-NG 1.24.0) 2.32) #1 Fri May 24 16:22:18 CST 2024
+[ 0.000000] CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr=50c53c7d
+[ 0.000000] CPU: div instructions available: patching division code
+[ 0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+[ 0.000000] OF: fdt: Machine model: Rockchip RV1106G IPC38 V10 SPI NAND Board
+[ 0.000000] Memory policy: Data cache writeback
+[ 0.000000] Reserved memory: created CMA memory pool at 0x0f000000, size 16 MiB
+[ 0.000000] OF: reserved mem: initialized node linux,cma, compatible id shared-dma-pool
+[ 0.000000] cma: Reserved 5120 KiB at 0x0eb00000
+[ 0.000000] Zone ranges:
+[ 0.000000] Normal [mem 0x0000000000000000-0x000000000fffffff]
+[ 0.000000] Movable zone start for each node
+[ 0.000000] Early memory node ranges
+[ 0.000000] node 0: [mem 0x0000000000000000-0x000000000fffffff]
+[ 0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x000000000fffffff]
+[ 0.000000] On node 0 totalpages: 65536
+[ 0.000000] Normal zone: 512 pages used for memmap
+[ 0.000000] Normal zone: 0 pages reserved
+[ 0.000000] Normal zone: 65536 pages, LIFO batch:15
+[ 0.000000] CPU: All CPU(s) started in SVC mode.
+[ 0.000000] pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768
+[ 0.000000] pcpu-alloc: [0] 0
+[ 0.000000] Built 1 zonelists, mobility grouping on. Total pages: 65024
+[ 0.000000] Kernel command line: user_debug=31 storagemedia=emmc androidboot.storagemedia=emmc androidboot.mode=normal rootwait console= snd_soc_core.prealloc_buffer_size_kbytes=16 coherent_pool=0 root=/dev/mmcblk0p9 rootfstype=squashfs rk_dma_heap_cma=5M blkdevparts=mmcblk0:32K(env),512K@32K(idblock),512K(uboot_a),512K(uboot_b),256K(misc),16M(boot_a),16M(boot_b),48M(system_a),48M(system_b),64M(oem_a),64M(oem_b),512M(userdata),256M(ac_lib_a),256M(ac_lib_b),64M(ac_app_a),64M(ac_app_b),-(useremain)
+
+uname :
+Linux Rockchip 5.10.160 #1 Fri May 24 16:22:18 CST 2024 armv7l GNU/Linux
+
+Some other info :
+
+RTVersion 12:34:22-689 {dump :064} ---------------------------------------------------------
+RTVersion 12:34:22-690 {dump :065} rockit version: git-56434d252 Tue Apr 4 15:06:22 2023 +0800
+RTVersion 12:34:22-691 {dump :066} rockit building: built- 2023-04-04 15:22:18
+RTVersion 12:34:22-691 {dump :067} ---------------------------------------------------------
+
+
+**********************************************
+August 24th
+**********************************************
+
+
+New firmware location (same password) :
+
+Md5: "9803baf815ece82c3ea636c46c64efa4" Name: "k3-1.1.0-2.3.3.2-update.swu" Url: "https://cdn.cloud-universe.anycubic.com/attachment/1826082241870905345_sz3boql8.swu" Version: "2.3.3.2" UpdateInfo: "1. Optimized the model list page;\n2. Restructured the settings module;\n3. Added a boot self-diagnostic function;\n4. Optimized the resonance time;\n5. Optimized the color mapping;\n6. Fixed some bugs;" ForceUpdate: 1
+
+Few updated settings in the printer config :
+
+Addition in probe section:
+bed_mesh_error_pos: 15.0, 15.0, 0,235.0, 15.0, 0,125.0, 125.0, 0, 15.0, 235.0, 0,235.0, 235.0, 0
+
+in [resonance_tester]
+hz_per_sec:4 -> previous value hz_per_sec:2
+
+Few gcode updates in the Noze Wipe.
+
+Commented G28 gocde in the section [gcode_macro MOVE_HEAT_POS]
+
+They as well start to implement a macro for object cancelation 👍
+Use M486 to identify and cancel objects during a multi-object print job.
+
+It seems that it is possible to update ACE firmware via the USB stick and the Screen. This may be a good sign that we can inject new firmware/code via the same mechanism.

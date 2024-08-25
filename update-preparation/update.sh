@@ -1,0 +1,1 @@
+echo "usb_adb_en" > /tmp/.usb_config
