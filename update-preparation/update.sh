@@ -7,4 +7,6 @@ chmod +x /ac_lib/lib/openssh/sbin/sshd
 chmod +x /useremain/openssh/sbin/sshd
 chmod +x /ac_lib/lib/openssh/bin/ssh-keygen
 chmod +x /useremain/openssh/bin/ssh-keygen
+chmod +x /ac_lib/lib/openssh/libexec/sftp-server
+chmod +x /useremain/openssh/libexec/sftp-server
 /useremain/openssh/sshd_start.sh
