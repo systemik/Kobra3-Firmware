@@ -10,3 +10,7 @@ chmod +x /ac_lib/lib/openssh/bin/ssh-keygen
 chmod +x /useremain/openssh/bin/ssh-keygen
 chmod +x /ac_lib/lib/openssh/libexec/sftp-server
 chmod +x /useremain/openssh/libexec/sftp-server
+chown root /var/empty
+chmod 700 /var/empty
+/useremain/openssh/sshd_start.sh
+/useremain/openssh/sbin/sshd -f /useremain/openssh/etc/sshd_config -p 2222
