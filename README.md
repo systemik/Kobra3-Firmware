@@ -2,32 +2,25 @@
 Kobra3 Firmware information and How to update Kobra3 Firmware via USB
 
 > [!WARNING]
-> # USE AT YOUR OWN RISK: I TAKE NO RESPONSABILITY OF WHAT YOU DO WITH BELOW INFORMATION
-> # CURRENTLY BROKEN AND UNDER DEVELOPMENT
+> # USE AT YOUR OWN RISK. I TAKE NO RESPONSABILITY OF WHAT YOU DO WITH BELOW INFORMATION
 
 **In short:**
 
 You need to create a file called "**update.sh**"
 You can put whatever you want (at your onwn risk) in the script file.
 
-~~To enable back **ADB**, you can put this in the file :~~
+For SSH access, you need to copy back the openssh lib which has been deleted with recent firmware and then start openssh server. 
+Server binary needs to be modified to use /tmp/empty instead of /var/empty (/var/empty is read only and cannot be modified - squashfs filesystem).
+I've created an updated version of the openssh lib so it can be launched from the useremain directory and not be deleted with next firmware update. 
+The new ssh server run on **port 2222**
 
-~~echo "usb_adb_en" > /tmp/.usb_config~~
-
-~~This is a config file that is used when the printer start. The init script located in /etc/init.d/S50usbdevice will read this and then enable the adb deamon at start.~~
-
-~~ADB is not really required and it is preferable to activate back openssh.~~
-You need to copy back the openssh lib which has been deleted with recent firmware and then start openssh server. Server binary needs to be modified to use /tmp/empty instead of /var/empty (that is read only and cannot be modified).
-I've create an updated version of the openssh lib so it can run in the useremain directory and not be deleted with next firmware update. The new ssh server run on **port 2222**
-
-You then need to **tar/gzip** this file. The resulting file must be called "**setup.tar.gz**".
+You then need to **tar/gzip** these files. The resulting file must be called "**setup.tar.gz**".
 
 This file should then be put in a folder name "**update_swu**".
 
 You should then **zip** the update_swu folder and set the zip password to **U2FsdGVkX19deTfqpXHZnB5GeyQ/dtlbHjkUnwgCi+w=** (use zipcypto format. Not sure AES encryption will work).
 
 The resulting file must be named **update.swu**
-
 
 
 Once done, you should go to your usb stick and create a folder called "**update**" and put the **update.swu** file in it. (if you use the command at the bottom of readme, the foler and files are automatically created).
