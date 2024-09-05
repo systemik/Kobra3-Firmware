@@ -73,3 +73,7 @@ Test if you can connect via SSH again. (**port 2222**)
 ![step5](/screenshots/attachment(4).jpg "step5").
   
 ![step6](/screenshots/attachment(5).jpg "step6").
+
+![step7](/screenshots/attachment(6).jpg "step7").
+
+
