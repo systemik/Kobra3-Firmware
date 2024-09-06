@@ -16,7 +16,7 @@ sleep 1
 echo 0 > /sys/class/pwm/pwmchip0/pwm0/enable
 
 # clean old openssh
-rm -rf /openssh
+rm -rf /useremain/update_swu/openssh
 # copy new openssh (with /var/empty changed to /tmp/empty in the binary)
 cp -r /useremain/update_swu/openssh /useremain/openssh
 
