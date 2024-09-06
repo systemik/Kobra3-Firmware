@@ -31,6 +31,10 @@ You will need to reboot the printer when done.
 
 Test if you can connect via SSH again. (**port 2222**)
 
+---
+
+> [!WARNING]
+> In the folder "update-preparation" you will find the required files and in the "update.swu" you will find a prepackaged update. I invite you to open the update package and check the content before applying it to your printer (opeen swu with 7zip, decompress and use password mentionned above).
 
 ---
 **Summary of the steps :**
