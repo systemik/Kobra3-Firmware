@@ -10,6 +10,16 @@ How does the bed mesh configuration in printer.cfg work : https://www.klipper3d.
 > # PUTTING WRONG INFO IN PRINTER:CFG FILE CAN PREVENT THE PRINTER TO BOOT
 > # IF PRINTER STUCK AT BOOT WITH ERROR ABOUT PRINT HEAD SICONNECTED, YOU MAY NEED TO FIX PRINTER BY INJECTING CORRECT PRINTER:CFG VIA FIRMWARE UPDATE METHOD OF THIS REPOSITORY
 
+![visualizer](visualizer.png "visualizer").
+
+
+You need to take the bed mesh data from the file here : 
+
+/userdata/app/gk/printer_mutable.cfg
+
+You then copy the points data and format it as required (replace \n and put results on 5 lines).
+
+Click visualize and that is it.
 
 A simple Web page to render a 3D mesh of [Marlin G29] results using [Plotly.js].
 
