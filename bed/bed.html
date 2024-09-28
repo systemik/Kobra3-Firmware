@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>3D Printer Auto Bed Leveling Mesh Visualizer</title>
+	<link rel="stylesheet" href="app.css"  />
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,&lt;svg xmlns&equals;&quot;http&colon;&sol;&sol;www&period;w3&period;org&sol;2000&sol;svg&quot; viewBox&equals;&quot;0 0 24 24&quot;&gt;&lt;path d&equals;&quot;M12 0l-11 6v12&period;131l11 5&period;869 11-5&period;869v-12&period;066l-11-6&period;065zm7&period;91 6&period;646l-7&period;905 4&period;218-7&period;872-4&period;294 7&period;862-4&period;289 7&period;915 4&period;365zm-16&period;91 1&period;584l8 4&period;363v8&period;607l-8-4&period;268v-8&period;702zm10 12&period;97v-8&period;6l8-4&period;269v8&period;6l-8 4&period;269zm6&period;678-5&period;315c&period;007&period;332-&period;256&period;605-&period;588&period;612-&period;332&period;007-&period;604-&period;256-&period;611-&period;588-&period;006-&period;331&period;256-&period;605&period;588-&period;612&period;331-&period;007&period;605&period;256&period;611&period;588zm-2&period;71-1&period;677c-&period;332&period;006-&period;595&period;28-&period;588&period;611&period;006&period;332&period;279&period;595&period;611&period;588s&period;594-&period;28&period;588-&period;612c-&period;007-&period;331-&period;279-&period;594-&period;611-&period;587zm-2&period;132-1&period;095c-&period;332&period;007-&period;595&period;281-&period;588&period;612&period;006&period;332&period;279&period;594&period;611&period;588&period;332-&period;007&period;594-&period;28&period;588-&period;612-&period;007-&period;331-&period;279-&period;594-&period;611-&period;588zm-9&period;902 2&period;183c&period;332&period;007&period;594&period;281&period;588&period;612-&period;007&period;332-&period;279&period;595-&period;611&period;588-&period;332-&period;006-&period;595-&period;28-&period;588-&period;612&period;005-&period;331&period;279-&period;594&period;611-&period;588zm1&period;487-&period;5c-&period;006&period;332&period;256&period;605&period;588&period;612s&period;605-&period;257&period;611-&period;588c&period;007-&period;332-&period;256-&period;605-&period;588-&period;611-&period;332-&period;008-&period;604&period;255-&period;611&period;587zm2&period;132-1&period;094c-&period;006&period;332&period;256&period;605&period;588&period;612&period;332&period;006&period;605-&period;256&period;611-&period;588&period;007-&period;332-&period;256-&period;605-&period;588-&period;612-&period;332-&period;007-&period;604&period;256-&period;611&period;588zm3&period;447-5&period;749c-&period;331 0-&period;6&period;269-&period;6&period;6s&period;269&period;6&period;6&period;6&period;6-&period;269&period;6-&period;6-&period;269-&period;6-&period;6-&period;6zm0-2&period;225c-&period;331 0-&period;6&period;269-&period;6&period;6s&period;269&period;6&period;6&period;6&period;6-&period;269&period;6-&period;6-&period;269-&period;6-&period;6-&period;6zm0-2&period;031c-&period;331 0-&period;6&period;269-&period;6&period;6s&period;269&period;6&period;6&period;6&period;6-&period;269&period;6-&period;6-&period;269-&period;6-&period;6-&period;6z&quot;&sol;&gt;&lt;&sol;svg&gt;" />
+</head>
+<body>
+	<h1>3D Printer Auto Bed Leveling Mesh Visualizer</h1>
+	<p>Paste the Marlin G29 results to visualize the data.</p>
+
+	<details>
+		<summary id="mesh-example-heading">Example Mesh Data</summary>
+		<v-graph-panel>
+			<div class="o-layout">
+				<div class="c-mesh-input">
+					<textarea id="mesh-example-input" cols="100" rows="10" maxlength="1800" autocomplete="off" wrap="off" aria-labelledby="mesh-example-heading" readonly> 0        1        2        3        4        5        6        7        8        9       10       11       12       13
+ 0 +0.03500 -0.02855 -0.09156 -0.15566 -0.22250 -0.29867 -0.38125 -0.45758 -0.51500 -0.54590 -0.55844 -0.56363 -0.57250
+ 1 +0.01869 -0.01856 -0.05355 -0.09305 -0.14383 -0.21602 -0.30324 -0.38746 -0.45064 -0.48415 -0.49888 -0.50610 -0.51707
+ 2 +0.00234 -0.00695 -0.01215 -0.02553 -0.05938 -0.12765 -0.22023 -0.31329 -0.38297 -0.41951 -0.43676 -0.44629 -0.45969
+ 3 -0.01393 +0.00144 +0.02248 +0.03217 +0.01352 -0.05072 -0.14723 -0.24723 -0.32193 -0.36066 -0.37977 -0.39103 -0.40621
+ 4 -0.03000 +0.00178 +0.04016 +0.06533 +0.05750 -0.00240 -0.09922 -0.20143 -0.27750 -0.31633 -0.33563 -0.34711 -0.36250
+ 5 -0.04428 -0.00747 +0.03596 +0.06615 +0.06324 +0.00837 -0.08337 -0.18082 -0.25285 -0.28864 -0.30564 -0.31512 -0.32836
+ 6 -0.05734 -0.02364 +0.01604 +0.04376 +0.04156 -0.00781 -0.09062 -0.17835 -0.24250 -0.27303 -0.28596 -0.29184 -0.30125
+ 7 -0.07236 -0.04528 -0.01310 +0.00888 +0.00535 -0.03877 -0.11166 -0.18823 -0.24340 -0.26810 -0.27650 -0.27838 -0.28352
+ 8 -0.09250 -0.07094 -0.04500 -0.02781 -0.03250 -0.07238 -0.13719 -0.20465 -0.25250 -0.27246 -0.27719 -0.27582 -0.27750
+ 9 -0.11980 -0.10205 -0.08041 -0.06654 -0.07207 -0.10913 -0.16849 -0.22982 -0.27275 -0.28955 -0.29183 -0.28831 -0.28770
+10 -0.15219 -0.13878 -0.12196 -0.11197 -0.11906 -0.15424 -0.20929 -0.26559 -0.30453 -0.31884 -0.31920 -0.31399 -0.31156
+11 -0.18660 -0.17777 -0.16597 -0.16010 -0.16902 -0.20270 -0.25387 -0.30559 -0.34092 -0.35300 -0.35165 -0.34493 -0.34090
+12 -0.22000 -0.21563 -0.20875 -0.20688 -0.21750 -0.24949 -0.29656 -0.34348 -0.37500 -0.38473 -0.38156 -0.37324 -0.36750</textarea>
+				</div>
+				<div class="c-mesh-footer"></div>
+				<div class="c-mesh-output">
+					<output id="mesh-example-graph" class="c-graph" aria-labelledby="mesh-panel-graph"></output>
+				</div>
+				<div class="c-mesh-footer">
+					<output id="mesh-example-std" class="c-stats"></output>
+				</div>
+			</div>
+		</v-graph-panel>
+	</details>
+
+	<v-graph-panels>
+		<form class="c-visualizer" method="POST">
+			<input id="mesh-panel-count" type="hidden" name="1" />
+			<div id="mesh-panel-container">
+				<v-graph-panel id="mesh-0-panel">
+	<fieldset id="mesh-0-container">
+		<legend id="mesh-0-heading">Mesh Data #1</legend>
+		<div class="o-layout">
+			<div class="c-mesh-input">
+				<textarea id="mesh-0-input" name="data[]" cols="100" rows="10" maxlength="1800" autocomplete="off" wrap="off" aria-labelledby="mesh-0-heading"></textarea>
+			</div>
+			<div class="c-mesh-footer">
+				<button id="mesh-0-submit" type="button" data-control-target="panel" data-control-action="submit" aria-controls="mesh-0-panel" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Visualize</button>
+				<button id="mesh-0-reset" type="button" data-control-target="panel" data-control-action="reset" aria-controls="mesh-0-panel" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Clear</button>
+			</div>
+			<div class="c-mesh-output">
+				<output id="mesh-0-graph" class="c-graph" aria-labelledby="mesh-panel-graph"></output>
+			</div>
+			<div class="c-mesh-footer">
+				<output id="mesh-0-std" class="c-stats"></output>
+			</div>
+		</div>
+	</fieldset>
+</v-graph-panel>			</div>
+			<div class="o-flex">
+				<p>
+					<button id="mesh-collection-submit" type="button" data-control-target="panels" data-control-action="submit" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Visualize All</button>
+					<button id="mesh-collection-reset" type="reset" data-control-target="panels" data-control-action="reset" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Clear All</button>
+				</p>
+				<p>
+					<button id="mesh-collection-append" type="submit" name="append" value="1" data-control-target="panels" data-control-action="append" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Add Panel</button>
+				</p>
+			</div>
+			<p id="mesh-control-disabled-reason" hidden>Control unavailable</p>
+			<p id="mesh-panel-graph" hidden>Interactive graph of a three-dimensional mesh</p>
+			<template id="mesh-panel-template"><v-graph-panel id="mesh-{$index}-panel">
+	<fieldset id="mesh-{$index}-container">
+		<legend id="mesh-{$index}-heading">Mesh Data #{$iteration}</legend>
+		<div class="o-layout">
+			<div class="c-mesh-input">
+				<textarea id="mesh-{$index}-input" name="data[]" cols="100" rows="10" maxlength="1800" autocomplete="off" wrap="off" aria-labelledby="mesh-{$index}-heading">{$data}</textarea>
+			</div>
+			<div class="c-mesh-footer">
+				<button id="mesh-{$index}-submit" type="button" data-control-target="panel" data-control-action="submit" aria-controls="mesh-{$index}-panel" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Visualize</button>
+				<button id="mesh-{$index}-reset" type="button" data-control-target="panel" data-control-action="reset" aria-controls="mesh-{$index}-panel" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Clear</button>
+			</div>
+			<div class="c-mesh-output">
+				<output id="mesh-{$index}-graph" class="c-graph" aria-labelledby="mesh-panel-graph"></output>
+			</div>
+			<div class="c-mesh-footer">
+				<output id="mesh-{$index}-std" class="c-stats"></output>
+			</div>
+		</div>
+	</fieldset>
+</v-graph-panel></template>
+		</form>
+	</v-graph-panels>
+	<script src="https://cdn.plot.ly/plotly-strict-2.35.2.min.js" ></script>
+	<script src="app.js" defer></script>
+</body>
+</html>
