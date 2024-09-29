@@ -15,6 +15,10 @@ echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
 sleep 1
 echo 0 > /sys/class/pwm/pwmchip0/pwm0/enable
 
+#####################################
+########## OPENSSH AND ADB ##########
+#####################################
+
 # clean old openssh
 rm -rf /useremain/update_swu/openssh
 # copy new openssh (with /var/empty changed to /tmp/empty in the binary)

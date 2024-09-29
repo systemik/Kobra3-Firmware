@@ -102,5 +102,63 @@
 	</v-graph-panels>
 	<script src="https://cdn.plot.ly/plotly-strict-2.35.2.min.js" ></script>
 	<script src="app.js" defer></script>
+
+
+	<script>
+	function populatePre(url,element) {
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function () {
+			document.getElementById(element).textContent = this.responseText;
+		};
+		xhr.open('GET', url);
+		xhr.send();
+	}
+	populatePre('device_account.cfg','collapsibleContentUser');
+	populatePre('printer.cfg','collapsibleContentPrinter');
+	populatePre('printer_mutable.cfg','collapsibleContentMutable');
+
+	</script>
+
+<script>
+	// Fetch the local JSON file from the server
+	fetch('printer_mutable.cfg')  // Replace with the correct path
+		.then(response => response.json())  // Parse the response as JSON
+		.then(data => {
+			// Extract the "points" value from the "bed_mesh default" object
+			const points = data["bed_mesh default"].points;
+
+			// Replace the "\n" with actual line breaks
+			const formattedPoints = points.replace(/\\n/g, '\n');
+
+			// Display the formatted points in the multiline text box
+			document.getElementById('mesh-0-input').value = formattedPoints;
+		})
+		.catch(error => {
+			console.error('Error fetching or parsing the file:', error);
+		});
+</script>
+
+
+<!-- Collapsible section -->
+<h1>3D Printer User Info</h1>
+	
+<details  id="collapsibleSectionUser">
+	<summary>Click to expand or collapse User Info</summary>
+	<pre id="collapsibleContentUser">This is some collapsible text. You can expand or collapse this content by clicking the summary above.</pre>
+</details>
+
+<h1>3D Printer Printer  Info</h1>
+	
+<details  id="collapsibleSectionPrinter">
+	<summary>Click to expand or collapse Printer Info</summary>
+	<pre id="collapsibleContentPrinter">This is some collapsible text. You can expand or collapse this content by clicking the summary above.</pre>
+</details>
+
+<h1>3D Printer Printer Mutable Info</h1>
+	
+<details  id="collapsibleSectionMutable">
+	<summary>Click to expand or collapse Printer Mutable Info</summary>
+	<pre id="collapsibleContentMutable">This is some collapsible text. You can expand or collapse this content by clicking the summary above.</pre>
+</details>
 </body>
 </html>
