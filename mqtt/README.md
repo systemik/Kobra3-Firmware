@@ -7,9 +7,10 @@ You can connect to MQTT on port 9338
 Here are few topic and what needs to be posted to them:
 
 
-Change ACE Slot 3 (4th roll) filament type and color.
+## Change ACE Slot 3 (4th roll) filament type and color.
 
-topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/multiColorBox, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/multiColorBox, qos: 0
+```
 {
       "type": "multiColorBox",
       "action": "setInfo",
@@ -30,11 +31,13 @@ topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b4
         ]
       }
     }
+```
 
 
-Start ACE drying at 45° for 4 hours
+## Start ACE drying at 45° for 4 hours
 
-topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/multiColorBox, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/multiColorBox, qos: 0
+```
 {
       "type": "multiColorBox",
       "action": "setDry",
@@ -53,11 +56,12 @@ topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b4
         ]
       }
     }
+```
 
-Stop ACE drying 
+## Stop ACE drying 
 
-
-topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/multiColorBox, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/multiColorBox, qos: 0
+```
 {
       "type": "multiColorBox",
       "action": "setDry",
@@ -74,10 +78,12 @@ topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b4
         ]
       }
     }
+```
 
-HOMING
+## HOMING
 
-topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+```
 {
       "type":"axis",
       "action":"move",
@@ -89,11 +95,13 @@ topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b4
         "distance": 0
       }
     }
+```
 
 
-Z UP of 1mm
+## Z UP of 1mm
 
-topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+```
 {
       "type":"axis",
       "action":"move",
@@ -105,10 +113,12 @@ topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b4
         "distance": 1
       }
     }
+```
 
-X 1mm
+## X 1mm
 
-topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+```
 {
       "type":"axis",
       "action":"move",
@@ -120,9 +130,12 @@ topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b4
         "distance": 1
       }
     }
-Y 1mm
+```
 
-topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+## Y 1mm
+
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+```
 {
       "type":"axis",
       "action":"move",
@@ -134,9 +147,12 @@ topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b4
         "distance": 1
       }
     }
+```
 
-X -1mm 
-topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+## X -1mm 
+
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+```
 {
       "type":"axis",
       "action":"move",
@@ -148,10 +164,12 @@ topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b4
         "distance": 1
       }
     }
+```
 
-Disable motors
+## Disable motors
 
-topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+```
 {
       "type":"axis",
       "action":"turnOff",
@@ -159,3 +177,4 @@ topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b4
       "msgid": "02fd3987-a2ff-244e-7c95-7fe257a9ef70",
       "data": null
     }
+```
