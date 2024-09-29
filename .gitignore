@@ -1,10 +1,9 @@
 update-preparation/update_swu
 update-preparation-debug
 gcode upload
-mqtt
+
 CompileApplications
 bed
 WebServer
-update-preparation/nginx
 tempo
-/update-preparation/nginx
+mqtt/mqtt analysis
