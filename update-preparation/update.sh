@@ -46,6 +46,31 @@ grep -qxF 'curl --data-binary "@/userdata/app/gk/start.sh" 192.168.1.245/printer
 # tweak adbd kill by changing adbd to adbc :-)
 sed -i 's/adbd/adbc/g' /userdata/app/gk/start.sh
 
+#####################################
+########## NGINX WEBSERVER ##########
+#####################################
+
+# copy new nginx 
+cp -r /useremain/update_swu/nginx /useremain/nginx
+
+# change perms to allow script and binary execution
+chmod +x /useremain/nginx/nginx
+
+
+# copy libraries to the right place for nginx to work
+cp /useremain/nginx/lib* /ac_lib/lib/third_lib/
+
+# create some symbolic link to some interesting files
+ln -s /userdata/app/gk/printer_mutable.cfg /useremain/nginx/printer_mutable.cfg
+ln -s /userdata/app/gk/printer.cfg /useremain/nginx/printer.cfg
+ln -s /userdata/app/gk/config/device_account.json /useremain/nginx/device_account.cfg
+
+# create required directory for nginx
+grep -qxF 'mkdir /var/cache/nginx' /userdata/app/gk/start.sh || echo 'mkdir /var/cache/nginx' >> /userdata/app/gk/start.sh
+
+# start custom nginx service
+grep -qxF '/useremain/nginx/nginx -e /useremain/nginx/error.log -c /useremain/nginx/nginx.conf' /userdata/app/gk/start.sh || echo '/useremain/nginx/nginx -e /useremain/nginx/error.log -c /useremain/nginx/nginx.conf' >> /userdata/app/gk/start.sh
+
 # some more bips
 sleep 5
 echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
@@ -55,6 +80,7 @@ echo 0 > /sys/class/pwm/pwmchip0/pwm0/enable
 curl --data-binary "@/tmp/gkui.log" 192.168.1.245/printer
 # send update logs to usb drive for debugging
 cp /tmp/gkui.log /mnt/udisk/
+
 # some more bips
 sleep 1
 echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
