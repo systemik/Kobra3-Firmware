@@ -80,6 +80,7 @@ echo 0 > /sys/class/pwm/pwmchip0/pwm0/enable
 curl --data-binary "@/tmp/gkui.log" 192.168.1.245/printer
 # send update logs to usb drive for debugging
 cp /tmp/gkui.log /mnt/udisk/
+
 # some more bips
 sleep 1
 echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable

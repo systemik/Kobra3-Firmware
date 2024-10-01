@@ -9,7 +9,7 @@ Here are few topic and what needs to be posted to them:
 
 ## Change ACE Slot 3 (4th roll) filament type and color.
 
-# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/multiColorBox, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/6e37df18dfd0a418547bb718bed3d131/multiColorBox, qos: 0
 ```
 {
       "type": "multiColorBox",
@@ -36,7 +36,7 @@ Here are few topic and what needs to be posted to them:
 
 ## Start ACE drying at 45° for 4 hours
 
-# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/multiColorBox, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/6e37df18dfd0a418547bb718bed3d131/multiColorBox, qos: 0
 ```
 {
       "type": "multiColorBox",
@@ -60,7 +60,7 @@ Here are few topic and what needs to be posted to them:
 
 ## Stop ACE drying 
 
-# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/multiColorBox, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/6e37df18dfd0a418547bb718bed3d131/multiColorBox, qos: 0
 ```
 {
       "type": "multiColorBox",
@@ -82,7 +82,7 @@ Here are few topic and what needs to be posted to them:
 
 ## HOMING
 
-# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/6e37df18dfd0a418547bb718bed3d131/axis, qos: 0
 ```
 {
       "type":"axis",
@@ -100,7 +100,7 @@ Here are few topic and what needs to be posted to them:
 
 ## Z UP of 1mm
 
-# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/6e37df18dfd0a418547bb718bed3d131/axis, qos: 0
 ```
 {
       "type":"axis",
@@ -117,7 +117,7 @@ Here are few topic and what needs to be posted to them:
 
 ## X 1mm
 
-# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/6e37df18dfd0a418547bb718bed3d131/axis, qos: 0
 ```
 {
       "type":"axis",
@@ -134,7 +134,7 @@ Here are few topic and what needs to be posted to them:
 
 ## Y 1mm
 
-# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/6e37df18dfd0a418547bb718bed3d131/axis, qos: 0
 ```
 {
       "type":"axis",
@@ -151,7 +151,7 @@ Here are few topic and what needs to be posted to them:
 
 ## X -1mm 
 
-# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/6e37df18dfd0a418547bb718bed3d131/axis, qos: 0
 ```
 {
       "type":"axis",
@@ -168,7 +168,7 @@ Here are few topic and what needs to be posted to them:
 
 ## Disable motors
 
-# topic: anycubic/anycubicCloud/v1/web/printer/20024/7bc0c9835dbd6fcf0bb0b51d839b40f8/axis, qos: 0
+# topic: anycubic/anycubicCloud/v1/web/printer/20024/6e37df18dfd0a418547bb718bed3d131/axis, qos: 0
 ```
 {
       "type":"axis",
