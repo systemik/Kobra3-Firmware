@@ -4,7 +4,7 @@ You can connect to MQTT on port 9338
 ![mqtt](/mqtt/mqtt.png "mqtt").
 
 
-Here are few topic and what needs to be posted to them:
+Here are few topic and what needs to be posted to them to execute an action:
 
 
 ## Change ACE Slot 3 (4th roll) filament type and color.

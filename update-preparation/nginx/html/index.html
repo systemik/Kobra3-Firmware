@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,20 +16,11 @@
 		<v-graph-panel>
 			<div class="o-layout">
 				<div class="c-mesh-input">
-					<textarea id="mesh-example-input" cols="100" rows="10" maxlength="1800" autocomplete="off" wrap="off" aria-labelledby="mesh-example-heading" readonly> 0        1        2        3        4        5        6        7        8        9       10       11       12       13
- 0 +0.03500 -0.02855 -0.09156 -0.15566 -0.22250 -0.29867 -0.38125 -0.45758 -0.51500 -0.54590 -0.55844 -0.56363 -0.57250
- 1 +0.01869 -0.01856 -0.05355 -0.09305 -0.14383 -0.21602 -0.30324 -0.38746 -0.45064 -0.48415 -0.49888 -0.50610 -0.51707
- 2 +0.00234 -0.00695 -0.01215 -0.02553 -0.05938 -0.12765 -0.22023 -0.31329 -0.38297 -0.41951 -0.43676 -0.44629 -0.45969
- 3 -0.01393 +0.00144 +0.02248 +0.03217 +0.01352 -0.05072 -0.14723 -0.24723 -0.32193 -0.36066 -0.37977 -0.39103 -0.40621
- 4 -0.03000 +0.00178 +0.04016 +0.06533 +0.05750 -0.00240 -0.09922 -0.20143 -0.27750 -0.31633 -0.33563 -0.34711 -0.36250
- 5 -0.04428 -0.00747 +0.03596 +0.06615 +0.06324 +0.00837 -0.08337 -0.18082 -0.25285 -0.28864 -0.30564 -0.31512 -0.32836
- 6 -0.05734 -0.02364 +0.01604 +0.04376 +0.04156 -0.00781 -0.09062 -0.17835 -0.24250 -0.27303 -0.28596 -0.29184 -0.30125
- 7 -0.07236 -0.04528 -0.01310 +0.00888 +0.00535 -0.03877 -0.11166 -0.18823 -0.24340 -0.26810 -0.27650 -0.27838 -0.28352
- 8 -0.09250 -0.07094 -0.04500 -0.02781 -0.03250 -0.07238 -0.13719 -0.20465 -0.25250 -0.27246 -0.27719 -0.27582 -0.27750
- 9 -0.11980 -0.10205 -0.08041 -0.06654 -0.07207 -0.10913 -0.16849 -0.22982 -0.27275 -0.28955 -0.29183 -0.28831 -0.28770
-10 -0.15219 -0.13878 -0.12196 -0.11197 -0.11906 -0.15424 -0.20929 -0.26559 -0.30453 -0.31884 -0.31920 -0.31399 -0.31156
-11 -0.18660 -0.17777 -0.16597 -0.16010 -0.16902 -0.20270 -0.25387 -0.30559 -0.34092 -0.35300 -0.35165 -0.34493 -0.34090
-12 -0.22000 -0.21563 -0.20875 -0.20688 -0.21750 -0.24949 -0.29656 -0.34348 -0.37500 -0.38473 -0.38156 -0.37324 -0.36750</textarea>
+					<textarea id="mesh-example-input" cols="100" rows="10" maxlength="1800" autocomplete="off" wrap="off" aria-labelledby="mesh-example-heading" readonly>-0.329000, -0.300000, -0.320500, -0.431000, -0.824000
+-0.220000, -0.090000, -0.027500, -0.130000, -0.420000
+-0.329000, -0.079000, 0.026000, 0.002500, -0.122500
+-0.521500, -0.157500, -0.031500, 0.047000, -0.004000
+-0.853000, -0.371000, -0.149000, -0.083500, 0.099500</textarea>
 				</div>
 				<div class="c-mesh-footer"></div>
 				<div class="c-mesh-output">
@@ -67,17 +57,6 @@
 		</div>
 	</fieldset>
 </v-graph-panel>			</div>
-			<div class="o-flex">
-				<p>
-					<button id="mesh-collection-submit" type="button" data-control-target="panels" data-control-action="submit" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Visualize All</button>
-					<button id="mesh-collection-reset" type="reset" data-control-target="panels" data-control-action="reset" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Clear All</button>
-				</p>
-				<p>
-					<button id="mesh-collection-append" type="submit" name="append" value="1" data-control-target="panels" data-control-action="append" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Add Panel</button>
-				</p>
-			</div>
-			<p id="mesh-control-disabled-reason" hidden>Control unavailable</p>
-			<p id="mesh-panel-graph" hidden>Interactive graph of a three-dimensional mesh</p>
 			<template id="mesh-panel-template"><v-graph-panel id="mesh-{$index}-panel">
 	<fieldset id="mesh-{$index}-container">
 		<legend id="mesh-{$index}-heading">Mesh Data #{$iteration}</legend>
@@ -100,8 +79,81 @@
 </v-graph-panel></template>
 		</form>
 	</v-graph-panels>
-	<script src="https://cdn.plot.ly/plotly-strict-2.35.2.min.js" ></script>
+
+
+	<button onclick="interpolateMatrix()" >Lagrange Interpolation (13x13) like what is used by printer for the bed mesh</button>
+	
+	<pre id="resultMatrix" hidden="true"></pre>
+
+
+	<script>
+		// Function to parse the matrix from textarea
+		function parseMatrix(input) {
+			const rows = input.trim().split('\n');
+			return rows.map(row => row.split(',').map(Number));
+		}
+		
+		// Lagrange interpolation function
+		function lagrangeInterpolate(x, y, x_new) {
+			let result = 0;
+			for (let i = 0; i < x.length; i++) {
+				let term = y[i];
+				for (let j = 0; j < x.length; j++) {
+					if (i !== j) {
+						term *= (x_new - x[j]) / (x[i] - x[j]);
+					}
+				}
+				result += term;
+			}
+			return result;
+		}
+		
+		// Interpolation function for a 1D array
+		function interpolate1D(data, x_new) {
+			const x = [0, 1, 2, 3, 4]; // Original 5x5 grid points
+			return x_new.map(xi => lagrangeInterpolate(x, data, xi));
+		}
+		
+		// Main function to handle interpolation of the 2D matrix
+		function interpolateMatrix() {
+			const matrixInput = document.getElementById("mesh-0-input").value;
+			const baseMatrix = parseMatrix(matrixInput);
+		
+			if (baseMatrix.length !== 5 || baseMatrix.some(row => row.length !== 5)) {
+				alert("Please enter a valid 5x5 matrix.");
+				return;
+			}
+		
+			const x_new = Array.from({ length: 13 }, (_, i) => i * 4 / 12); // 13 evenly spaced points from 0 to 4
+		
+			// Step 1: Interpolate rows (5x5 -> 13x5)
+			let interpolatedRows = [];
+			for (let i = 0; i < baseMatrix.length; i++) {
+				interpolatedRows.push(interpolate1D(baseMatrix[i], x_new));
+			}
+		
+			// Step 2: Interpolate columns (13x5 -> 13x13)
+			let finalMatrix = [];
+			for (let i = 0; i < 13; i++) {
+				let column = [];
+				for (let j = 0; j < 5; j++) {
+					column.push(interpolatedRows[j][i]);
+				}
+				finalMatrix.push(interpolate1D(column, x_new));
+			}
+		
+			// Display the result
+			const resultMatrix = document.getElementById("resultMatrix");
+			resultMatrix.textContent = finalMatrix.map(row => row.join(', ')).join('\n');
+			document.getElementById('mesh-0-input').value = finalMatrix.map(row => row.join(', ')).join('\n');
+
+		}
+		</script>
+
+
+	<script src="plotly-strict-2.35.2.min.js" ></script>
 	<script src="app.js" defer></script>
+
 
 
 	<script>
@@ -137,6 +189,8 @@
 			console.error('Error fetching or parsing the file:', error);
 		});
 </script>
+
+
 
 
 <!-- Collapsible section -->

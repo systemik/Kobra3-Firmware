@@ -72,7 +72,7 @@ function drawGraph(graphElement, stdElement, data) {
 		scene: {
 			zaxis: {
 				autorange: false,
-				range: [ -1, 1 ],
+				range: [ -4, 4 ],
 			},
 			camera: {
 				eye: {
