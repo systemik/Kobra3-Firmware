@@ -7,3 +7,4 @@ tempo
 mqtt/mqtt analysis
 **/.DS_Store
 .DS_Store
+mqtt/mosquitto*
