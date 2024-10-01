@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>3D Printer Auto Bed Leveling Mesh Visualizer</title>
+	<link rel="stylesheet" href="app.css"  />
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,&lt;svg xmlns&equals;&quot;http&colon;&sol;&sol;www&period;w3&period;org&sol;2000&sol;svg&quot; viewBox&equals;&quot;0 0 24 24&quot;&gt;&lt;path d&equals;&quot;M12 0l-11 6v12&period;131l11 5&period;869 11-5&period;869v-12&period;066l-11-6&period;065zm7&period;91 6&period;646l-7&period;905 4&period;218-7&period;872-4&period;294 7&period;862-4&period;289 7&period;915 4&period;365zm-16&period;91 1&period;584l8 4&period;363v8&period;607l-8-4&period;268v-8&period;702zm10 12&period;97v-8&period;6l8-4&period;269v8&period;6l-8 4&period;269zm6&period;678-5&period;315c&period;007&period;332-&period;256&period;605-&period;588&period;612-&period;332&period;007-&period;604-&period;256-&period;611-&period;588-&period;006-&period;331&period;256-&period;605&period;588-&period;612&period;331-&period;007&period;605&period;256&period;611&period;588zm-2&period;71-1&period;677c-&period;332&period;006-&period;595&period;28-&period;588&period;611&period;006&period;332&period;279&period;595&period;611&period;588s&period;594-&period;28&period;588-&period;612c-&period;007-&period;331-&period;279-&period;594-&period;611-&period;587zm-2&period;132-1&period;095c-&period;332&period;007-&period;595&period;281-&period;588&period;612&period;006&period;332&period;279&period;594&period;611&period;588&period;332-&period;007&period;594-&period;28&period;588-&period;612-&period;007-&period;331-&period;279-&period;594-&period;611-&period;588zm-9&period;902 2&period;183c&period;332&period;007&period;594&period;281&period;588&period;612-&period;007&period;332-&period;279&period;595-&period;611&period;588-&period;332-&period;006-&period;595-&period;28-&period;588-&period;612&period;005-&period;331&period;279-&period;594&period;611-&period;588zm1&period;487-&period;5c-&period;006&period;332&period;256&period;605&period;588&period;612s&period;605-&period;257&period;611-&period;588c&period;007-&period;332-&period;256-&period;605-&period;588-&period;611-&period;332-&period;008-&period;604&period;255-&period;611&period;587zm2&period;132-1&period;094c-&period;006&period;332&period;256&period;605&period;588&period;612&period;332&period;006&period;605-&period;256&period;611-&period;588&period;007-&period;332-&period;256-&period;605-&period;588-&period;612-&period;332-&period;007-&period;604&period;256-&period;611&period;588zm3&period;447-5&period;749c-&period;331 0-&period;6&period;269-&period;6&period;6s&period;269&period;6&period;6&period;6&period;6-&period;269&period;6-&period;6-&period;269-&period;6-&period;6-&period;6zm0-2&period;225c-&period;331 0-&period;6&period;269-&period;6&period;6s&period;269&period;6&period;6&period;6&period;6-&period;269&period;6-&period;6-&period;269-&period;6-&period;6-&period;6zm0-2&period;031c-&period;331 0-&period;6&period;269-&period;6&period;6s&period;269&period;6&period;6&period;6&period;6-&period;269&period;6-&period;6-&period;269-&period;6-&period;6-&period;6z&quot;&sol;&gt;&lt;&sol;svg&gt;" />
+</head>
+<body>
+	<h1>3D Printer Auto Bed Leveling Mesh Visualizer</h1>
+	<p>Paste the Marlin G29 results to visualize the data.</p>
+
+	<details>
+		<summary id="mesh-example-heading">Example Mesh Data</summary>
+		<v-graph-panel>
+			<div class="o-layout">
+				<div class="c-mesh-input">
+					<textarea id="mesh-example-input" cols="100" rows="10" maxlength="1800" autocomplete="off" wrap="off" aria-labelledby="mesh-example-heading" readonly>-0.329000, -0.300000, -0.320500, -0.431000, -0.824000
+-0.220000, -0.090000, -0.027500, -0.130000, -0.420000
+-0.329000, -0.079000, 0.026000, 0.002500, -0.122500
+-0.521500, -0.157500, -0.031500, 0.047000, -0.004000
+-0.853000, -0.371000, -0.149000, -0.083500, 0.099500</textarea>
+				</div>
+				<div class="c-mesh-footer"></div>
+				<div class="c-mesh-output">
+					<output id="mesh-example-graph" class="c-graph" aria-labelledby="mesh-panel-graph"></output>
+				</div>
+				<div class="c-mesh-footer">
+					<output id="mesh-example-std" class="c-stats"></output>
+				</div>
+			</div>
+		</v-graph-panel>
+	</details>
+
+	<v-graph-panels>
+		<form class="c-visualizer" method="POST">
+			<input id="mesh-panel-count" type="hidden" name="1" />
+			<div id="mesh-panel-container">
+				<v-graph-panel id="mesh-0-panel">
+	<fieldset id="mesh-0-container">
+		<legend id="mesh-0-heading">Mesh Data #1</legend>
+		<div class="o-layout">
+			<div class="c-mesh-input">
+				<textarea id="mesh-0-input" name="data[]" cols="100" rows="10" maxlength="1800" autocomplete="off" wrap="off" aria-labelledby="mesh-0-heading"></textarea>
+			</div>
+			<div class="c-mesh-footer">
+				<button id="mesh-0-submit" type="button" data-control-target="panel" data-control-action="submit" aria-controls="mesh-0-panel" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Visualize</button>
+				<button id="mesh-0-reset" type="button" data-control-target="panel" data-control-action="reset" aria-controls="mesh-0-panel" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Clear</button>
+			</div>
+			<div class="c-mesh-output">
+				<output id="mesh-0-graph" class="c-graph" aria-labelledby="mesh-panel-graph"></output>
+			</div>
+			<div class="c-mesh-footer">
+				<output id="mesh-0-std" class="c-stats"></output>
+			</div>
+		</div>
+	</fieldset>
+</v-graph-panel>			</div>
+			<template id="mesh-panel-template"><v-graph-panel id="mesh-{$index}-panel">
+	<fieldset id="mesh-{$index}-container">
+		<legend id="mesh-{$index}-heading">Mesh Data #{$iteration}</legend>
+		<div class="o-layout">
+			<div class="c-mesh-input">
+				<textarea id="mesh-{$index}-input" name="data[]" cols="100" rows="10" maxlength="1800" autocomplete="off" wrap="off" aria-labelledby="mesh-{$index}-heading">{$data}</textarea>
+			</div>
+			<div class="c-mesh-footer">
+				<button id="mesh-{$index}-submit" type="button" data-control-target="panel" data-control-action="submit" aria-controls="mesh-{$index}-panel" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Visualize</button>
+				<button id="mesh-{$index}-reset" type="button" data-control-target="panel" data-control-action="reset" aria-controls="mesh-{$index}-panel" aria-disabled="true" aria-describedby="mesh-control-disabled-reason">Clear</button>
+			</div>
+			<div class="c-mesh-output">
+				<output id="mesh-{$index}-graph" class="c-graph" aria-labelledby="mesh-panel-graph"></output>
+			</div>
+			<div class="c-mesh-footer">
+				<output id="mesh-{$index}-std" class="c-stats"></output>
+			</div>
+		</div>
+	</fieldset>
+</v-graph-panel></template>
+		</form>
+	</v-graph-panels>
+
+
+	<button onclick="interpolateMatrix()" >Lagrange Interpolation (13x13) like what is used by printer for the bed mesh</button>
+	
+	<pre id="resultMatrix" hidden="true"></pre>
+
+
+	<script>
+		// Function to parse the matrix from textarea
+		function parseMatrix(input) {
+			const rows = input.trim().split('\n');
+			return rows.map(row => row.split(',').map(Number));
+		}
+		
+		// Lagrange interpolation function
+		function lagrangeInterpolate(x, y, x_new) {
+			let result = 0;
+			for (let i = 0; i < x.length; i++) {
+				let term = y[i];
+				for (let j = 0; j < x.length; j++) {
+					if (i !== j) {
+						term *= (x_new - x[j]) / (x[i] - x[j]);
+					}
+				}
+				result += term;
+			}
+			return result;
+		}
+		
+		// Interpolation function for a 1D array
+		function interpolate1D(data, x_new) {
+			const x = [0, 1, 2, 3, 4]; // Original 5x5 grid points
+			return x_new.map(xi => lagrangeInterpolate(x, data, xi));
+		}
+		
+		// Main function to handle interpolation of the 2D matrix
+		function interpolateMatrix() {
+			const matrixInput = document.getElementById("mesh-0-input").value;
+			const baseMatrix = parseMatrix(matrixInput);
+		
+			if (baseMatrix.length !== 5 || baseMatrix.some(row => row.length !== 5)) {
+				alert("Please enter a valid 5x5 matrix.");
+				return;
+			}
+		
+			const x_new = Array.from({ length: 13 }, (_, i) => i * 4 / 12); // 13 evenly spaced points from 0 to 4
+		
+			// Step 1: Interpolate rows (5x5 -> 13x5)
+			let interpolatedRows = [];
+			for (let i = 0; i < baseMatrix.length; i++) {
+				interpolatedRows.push(interpolate1D(baseMatrix[i], x_new));
+			}
+		
+			// Step 2: Interpolate columns (13x5 -> 13x13)
+			let finalMatrix = [];
+			for (let i = 0; i < 13; i++) {
+				let column = [];
+				for (let j = 0; j < 5; j++) {
+					column.push(interpolatedRows[j][i]);
+				}
+				finalMatrix.push(interpolate1D(column, x_new));
+			}
+		
+			// Display the result
+			const resultMatrix = document.getElementById("resultMatrix");
+			resultMatrix.textContent = finalMatrix.map(row => row.join(', ')).join('\n');
+			document.getElementById('mesh-0-input').value = finalMatrix.map(row => row.join(', ')).join('\n');
+
+		}
+		</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="plotly-strict-2.35.2.min.js" ></script>
+	<script src="app.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script>
+	function populatePre(url,element) {
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function () {
+			document.getElementById(element).textContent = this.responseText;
+		};
+		xhr.open('GET', url);
+		xhr.send();
+	}
+	populatePre('device_account.cfg','collapsibleContentUser');
+	populatePre('printer.cfg','collapsibleContentPrinter');
+	populatePre('printer_mutable.cfg','collapsibleContentMutable');
+
+	</script>
+
+<script>
+	// Fetch the local JSON file from the server
+	fetch('printer_mutable.cfg')  // Replace with the correct path
+		.then(response => response.json())  // Parse the response as JSON
+		.then(data => {
+			// Extract the "points" value from the "bed_mesh default" object
+			const points = data["bed_mesh default"].points;
+
+			// Replace the "\n" with actual line breaks
+			const formattedPoints = points.replace(/\\n/g, '\n');
+
+			// Display the formatted points in the multiline text box
+			document.getElementById('mesh-0-input').value = formattedPoints;
+		})
+		.catch(error => {
+			console.error('Error fetching or parsing the file:', error);
+		});
+</script>
+
+
+
+
+<!-- Collapsible section -->
+<h1>3D Printer User Info</h1>
+	
+<details  id="collapsibleSectionUser">
+	<summary>Click to expand or collapse User Info</summary>
+	<pre id="collapsibleContentUser">This is some collapsible text. You can expand or collapse this content by clicking the summary above.</pre>
+</details>
+
+<h1>3D Printer Printer  Info</h1>
+	
+<details  id="collapsibleSectionPrinter">
+	<summary>Click to expand or collapse Printer Info</summary>
+	<pre id="collapsibleContentPrinter">This is some collapsible text. You can expand or collapse this content by clicking the summary above.</pre>
+</details>
+
+<h1>3D Printer Printer Mutable Info</h1>
+	
+<details  id="collapsibleSectionMutable">
+	<summary>Click to expand or collapse Printer Mutable Info</summary>
+	<pre id="collapsibleContentMutable">This is some collapsible text. You can expand or collapse this content by clicking the summary above.</pre>
+</details>
+</body>
+</html>
