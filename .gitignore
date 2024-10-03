@@ -8,3 +8,6 @@ mqtt/mqtt analysis
 **/.DS_Store
 .DS_Store
 mqtt/mosquitto*
+mqtt/mqtt.html
+mqtt/keytest
+/update-preparation-adb-only
