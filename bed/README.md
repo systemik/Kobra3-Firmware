@@ -1,4 +1,4 @@
-# 3D Printer Auto Bed Leveling Mesh Visualizer
+# 3D Printer Auto Bed Leveling Mesh Visualizer (Now part of firmware tweak which start a webserver and display current mesh)
 
 This web page is a conversion from PHP version made by:
 
@@ -21,7 +21,7 @@ You then copy the points data and format it as required (replace \n and put resu
 
 Click visualize and that is it.
 
-A simple Web page to render a 3D mesh of [Marlin G29] results using [Plotly.js].
+A simple Web page to render a 3D mesh of bed mesh results using [Plotly.js].
 
 The visualizer is based on the [ChillRain's visualizer][ChillRain].
 
