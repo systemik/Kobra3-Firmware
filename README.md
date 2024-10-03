@@ -70,7 +70,7 @@ Test if you can connect via SSH again. (**port 2222**)
 
 Address: http://x.x.x.x/bed/
 
-![visualizer](visualizer.png "visualizer").
+![visualizer](/screenshots/visualizer.png "visualizer").
 
 
 **Steps for the update (touch screen) :**
