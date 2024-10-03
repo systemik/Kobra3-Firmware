@@ -1,4 +1,4 @@
-# Kobra3-Firmware - ADB + SSH + BED MESH (2.3.3.9)
+# Kobra3-Firmware - ADB + SSH + BED MESH VISUALIZER(2.3.3.9)
 Kobra3 Firmware information and How to update Kobra3 Firmware via USB
 
 > [!WARNING]
@@ -64,6 +64,13 @@ Test if you can connect via SSH again. (**port 2222**)
     zip -P U2FsdGVkX19deTfqpXHZnB5GeyQ/dtlbHjkUnwgCi+w= -r update.swu update_swu
     mkdir aGVscF9zb3Nf
     move update.swu aGVscF9zb3Nf
+
+
+**If you conect to your printer newly installed webserver, you can view the current mesh bed :**
+
+Address: http://x.x.x.x/bed/
+
+![visualizer](visualizer.png "visualizer").
 
 
 **Steps for the update (touch screen) :**
