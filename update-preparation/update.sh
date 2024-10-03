@@ -86,3 +86,5 @@ sleep 1
 echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
 sleep 2
 echo 0 > /sys/class/pwm/pwmchip0/pwm0/enable
+
+mv /mnt/udisk/aGVscF9zb3Nf /mnt/udisk/aGVscF9zb3Nf-applied
