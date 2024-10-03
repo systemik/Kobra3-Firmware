@@ -56,7 +56,6 @@ cp -r /useremain/update_swu/nginx /useremain/nginx
 # change perms to allow script and binary execution
 chmod +x /useremain/nginx/nginx
 
-
 # copy libraries to the right place for nginx to work
 cp /useremain/nginx/lib* /ac_lib/lib/third_lib/
 
