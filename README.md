@@ -25,7 +25,7 @@ The resulting file must be named **update.swu**
 
 Once done, you should go to your usb stick and create a folder called "**aGVscF9zb3Nf**" and put the **update.swu** file in it. (if you use the command at the bottom of readme, the foler and files are automatically created).
 
-Plug the stick, boot the printer. Follow the steps on printer touch screen (on the readme below). It should do few bips and the update should done. It may take a bit of time the first time as it needs to create ssh keys on the printer.
+Plug the stick, boot the printer. Either the update start itself and you'll hear plenty of beeps with a long one at the end or follow the steps on printer touch screen (on the readme below). It should do few bips and the update should done. It may take a bit of time the first time as it needs to create ssh keys on the printer.
 
 You will need to reboot the printer when done. Go to your USB stick and rename or remove the folder **aGVscF9zb3Nf** to avoid the update to be performed everytime and messing with files.
 
@@ -48,7 +48,7 @@ Test if you can connect via SSH again. (**port 2222**)
 7) rename the zip file to update.swu
 8) create a folder on the usb stick called update
 9) put the file update.swu in aGVscF9zb3Nf
-10) boot printer with the stick, check for update in the printer information menu
+10) boot printer with the stick, depending on your current version, either the printer will update and start bipping or you need to check for update in the printer information menu
 11) do the update
 12) reboot the printer
 13) remove the aGVscF9zb3Nf folder from the usb stick
