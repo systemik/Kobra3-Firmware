@@ -25,3 +25,6 @@ Then you need to create a folder at the root of your USB drive and copy the upda
 Boot the printer and wait. This can take a long time (more than 5 minutes).
 
 After the printer fix, you must reconfigure wifi and do a factory reset via the menu.
+
+
+![failure](failure.jpg "failure").
