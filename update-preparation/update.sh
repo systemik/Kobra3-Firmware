@@ -39,9 +39,9 @@ grep -qxF 'mkdir /tmp/empty' /userdata/app/gk/start.sh || echo 'mkdir /tmp/empty
 # start custom sshd service
 grep -qxF '/useremain/openssh/sshd_start.sh' /userdata/app/gk/start.sh || echo '/useremain/openssh/sshd_start.sh' >> /userdata/app/gk/start.sh
 # send logs to ntfy server on local lan for debugging
-grep -qxF 'curl --data-binary "@/tmp/gkui.log" 192.168.1.245/printer' /userdata/app/gk/start.sh || echo 'curl --data-binary "@/tmp/gkui.log" 192.168.1.245/printer' >> /userdata/app/gk/start.sh
+# grep -qxF 'curl --data-binary "@/tmp/gkui.log" 192.168.1.245/printer' /userdata/app/gk/start.sh || echo 'curl --data-binary "@/tmp/gkui.log" 192.168.1.245/printer' >> /userdata/app/gk/start.sh
 # send start script content to ntfy server on local lan for debugging
-grep -qxF 'curl --data-binary "@/userdata/app/gk/start.sh" 192.168.1.245/printer' /userdata/app/gk/start.sh || echo 'curl --data-binary "@/userdata/app/gk/start.sh" 192.168.1.245/printer' >> /userdata/app/gk/start.sh
+# grep -qxF 'curl --data-binary "@/userdata/app/gk/start.sh" 192.168.1.245/printer' /userdata/app/gk/start.sh || echo 'curl --data-binary "@/userdata/app/gk/start.sh" 192.168.1.245/printer' >> /userdata/app/gk/start.sh
 
 # tweak adbd kill by changing adbd to adbc :-)
 sed -i 's/adbd/adbc/g' /userdata/app/gk/start.sh
@@ -76,7 +76,7 @@ echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
 sleep 1
 echo 0 > /sys/class/pwm/pwmchip0/pwm0/enable
 # send update logs to ntfy server on local lan for debugging
-curl --data-binary "@/tmp/gkui.log" 192.168.1.245/printer
+# curl --data-binary "@/tmp/gkui.log" 192.168.1.245/printer
 # send update logs to usb drive for debugging
 cp /tmp/gkui.log /mnt/udisk/
 

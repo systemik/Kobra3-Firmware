@@ -178,3 +178,25 @@ Here are few topic and what needs to be posted to them to execute an action:
       "data": null
     }
 ```
+## Topic used during print :
+
+## anycubic/anycubicCloud/v1/web/printer/20024/6e37df18dfd0a418547bb718bed3d131/print/report
+```
+{
+  "type":"print",
+  "action":"start",
+  "timestamp":10298233,
+  "msgid":"cc080f13-81e8-4326-8abb-6310725d4465",
+  "state":"printing",
+  "code":200,
+  "msg":"done",
+  "data":{"curr_layer":3,"filename":"XXX - Base_PLA_0.2_2h15m.gcode",
+  "localtask":"",
+  "print_time":33,
+  "progress":3,
+  "remain_time":102,
+  "supplies_usage":4903,
+  "taskid":"-1",
+  "total_layers":45}
+  }
+```
