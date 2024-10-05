@@ -6,6 +6,8 @@ Kobra3 Firmware information and How to update Kobra3 Firmware via USB
 > # Latest version tested : 2.3.3.9
 **In short:**
 
+Other repository of interest with mooraker and mainsail (untested by me) : https://github.com/utkabobr/DuckPro-Kobra3
+
 You need to create a file called "**update.sh**"
 You can put whatever you want (at your onwn risk) in the script file.
 
