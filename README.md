@@ -66,7 +66,7 @@ Test if you can connect via SSH again. (**port 2222**)
     move update.swu aGVscF9zb3Nf
 
 
-**If you conect to your printer newly installed webserver, you can view the current mesh bed :**
+**If you connect to your printer newly installed webserver, you can view the current mesh bed :**
 
 Address: http://x.x.x.x/bed/
 
