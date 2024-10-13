@@ -1,2 +1,2 @@
 #!/bin/sh
-/useremain/ntp/ntpdate pool.ntp.org
+/useremain/binaries/ntpdate pool.ntp.org
