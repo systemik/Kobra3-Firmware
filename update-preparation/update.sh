@@ -15,6 +15,10 @@ echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
 sleep 1
 echo 0 > /sys/class/pwm/pwmchip0/pwm0/enable
 
+# clean previous install folder
+
+rm -rf /mnt/udisk/aGVscF9zb3Nf-applied
+
 #####################################
 ########## OPENSSH AND ADB ##########
 #####################################
@@ -29,6 +33,7 @@ chmod +x /useremain/openssh/sshd_start.sh
 chmod +x /useremain/openssh/sbin/sshd
 chmod +x /useremain/openssh/bin/ssh-keygen
 chmod +x /useremain/openssh/libexec/sftp-server
+chmod +x /useremain/scripts/*
 
 # add few commands (if not existing) to the end of the start script
 
