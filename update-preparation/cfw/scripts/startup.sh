@@ -27,7 +27,7 @@ mkdir /var/cache/nginx
 # start nginx
 /useremain/cfw/nginx/nginx -e /useremain/cfw/nginx/error.log -c /useremain/cfw/nginx/nginx.conf
 # start flask server
-/useremain/cfw/dist/bin/python3.11 /useremain/cfw/scripts/flask-server.py
+/useremain/cfw/binaries/python3.11 /useremain/cfw/scripts/flask-server.py
 
 
 # copy logs for debug

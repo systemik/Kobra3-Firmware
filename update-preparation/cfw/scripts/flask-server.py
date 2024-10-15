@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, Response, jsonify
 import subprocess
 
 app = Flask(__name__)
@@ -6,36 +6,30 @@ app = Flask(__name__)
 @app.route('/scripts/<script_name>')
 def run_script(script_name):
     script_path = f'/useremain/cfw/nginx/html/scripts/{script_name}'
-    result = subprocess.run([script_path], capture_output=True, text=True)
-    try:
-        # Run the script, capture stdout and stderr
-        result = subprocess.run([script_path], capture_output=True, text=True)
-        
-        # Check if there was an error during script execution
-        if result.returncode != 0:
-            # If an error occurred, return stderr as the error message
-            return jsonify({
-                "success": False,
-                "error": result.stderr.strip()  # Error message from the script
-            }), 400  # HTTP status code 400 for bad request
 
-        # If the script ran successfully, return stdout
-        return jsonify({
-            "success": True,
-            "output": result.stdout.strip()  # Output from the script
-        })
-    
-    except Exception as e:
-        # Catch any other unexpected exceptions
-        return jsonify({
-            "success": False,
-            "error": str(e)  # Return the exception message
-        }), 500  # HTTP status code 500 for server error
+    def generate_output(script_path):
+        try:
+            process = subprocess.Popen(
+                [script_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+            )
 
+            # Read stdout line by line as it is produced
+            for stdout_line in iter(process.stdout.readline, ''):
+                yield f"data:{stdout_line}\n\n"  # SSE format
+            
+            # Wait for the process to finish and capture stderr if any
+            process.stdout.close()
+            process.wait()
 
-    #return result.stdout
+            # If the script finishes with an error
+            if process.returncode != 0:
+                error_output = process.stderr.read().strip()
+                yield f"data:ERROR: {error_output}\n\n"
+            
+        except Exception as e:
+            yield f"data:ERROR: {str(e)}\n\n"
+
+    return Response(generate_output(script_path), mimetype='text/event-stream')
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=5000,debug=True)
-
-
+    app.run(host='127.0.0.1', port=5000, debug=True)

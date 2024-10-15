@@ -207,18 +207,35 @@
     <button onclick="callScript('capture-stop.sh')">Stop Streaming</button>
     <button onclick="callScript('led-on.sh')">Start LED</button>
     <button onclick="callScript('led-off.sh')">Stop LED</button>
+    
+    <pre id="output"></pre>  <!-- The output will be displayed here -->
 
 
     <script>
-        // Function to call Flask API when the button is clicked
-        function callScript(scriptName) {
-            fetch('/scripts/' + scriptName)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('output').innerText = data.output;
-                })
-                .catch(error => console.error('Error:', error));
-        }
-    </script>
+    // Function to call Flask API when the button is clicked
+    function callScript(scriptName) {
+        const eventSource = new EventSource('/scripts/' + scriptName);
+        const outputElement = document.getElementById('output');
+        outputElement.innerText = "";  // Clear any previous output
+
+        // Event listener for incoming messages (script output)
+        eventSource.onmessage = function(event) {
+            // Append the output to the element
+            outputElement.innerText += event.data + '\n';
+
+            // Check for error message and close the connection
+            if (event.data.startsWith("ERROR:")) {
+                eventSource.close();
+            }
+        };
+
+        // Event listener for any errors during the connection
+        eventSource.onerror = function(event) {
+            outputElement.innerText += 'Connection error!\n';
+            eventSource.close();  // Close the connection on error
+        };
+    }
+</script>
+
 
 </body></html>
