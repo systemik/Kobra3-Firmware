@@ -23,17 +23,17 @@ rm -rf /mnt/udisk/aGVscF9zb3Nf-applied
 ########## OPENSSH AND ADB ##########
 #####################################
 
-# clean old openssh
-rm -rf /useremain/openssh
-# copy new openssh (with /var/empty changed to /tmp/empty in the binary)
-cp -r /useremain/update_swu/openssh /useremain/openssh
+# clean old cfw
+rm -rf /useremain/cfw
+# copy new cfw
+cp -r /useremain/update_swu/cfw /useremain/cfw
 
 # change perms to allow script and binary execution
-chmod +x /useremain/openssh/sshd_start.sh
-chmod +x /useremain/openssh/sbin/sshd
-chmod +x /useremain/openssh/bin/ssh-keygen
-chmod +x /useremain/openssh/libexec/sftp-server
-chmod +x /useremain/scripts/*
+chmod +x /useremain/cfw/openssh/sshd_start.sh
+chmod +x /useremain/cfw/openssh/sbin/sshd
+chmod +x /useremain/cfw/openssh/bin/ssh-keygen
+chmod +x /useremain/cfw/openssh/libexec/sftp-server
+chmod +x /useremain/cfw/scripts/*
 
 # add few commands (if not existing) to the end of the start script
 
