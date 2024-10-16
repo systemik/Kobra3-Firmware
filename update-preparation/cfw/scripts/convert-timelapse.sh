@@ -2,4 +2,5 @@
 
 TIMESTAMP=$(date +%s)
 
-ffmpeg -i delay.mp4 -vcodec libx264 -acodec aac -strict -2 timelapse-$TIMESTAMP.mp4
+ffmpeg -i /mnt/udisk/delayphoto/delay.mp4 -vcodec libx264 -acodec aac -strict -2 /mnt/udisk/delayphoto/timelapse-$TIMESTAMP.mp4
+
