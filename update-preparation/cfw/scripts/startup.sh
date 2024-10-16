@@ -9,8 +9,14 @@ killall python3.11
 
 # add library folder
 export LD_LIBRARY_PATH=/useremain/dist/lib:/useremain/cfw/libs:$LD_LIBRARY_PATH
+
 # add binary folder
 export PATH=/useremain/cfw/binaries:$PATH
+
+# change perms to allow script and binary execution
+chmod +x /useremain/cfw/binaries/*
+chmod +x /useremain/cfw/scripts/*
+chmod +x /useremain/cfw/nginx/nginx
 
 #####################################
 ########## SSHD WEBSERVER #######3###
@@ -18,6 +24,8 @@ export PATH=/useremain/cfw/binaries:$PATH
 
 # make # create required directory for sshd
 mkdir /tmp/empty
+# change perms to allow script and binary execution
+chmod +x /useremain/cfw/openssh/sshd_start.sh
 # start sshd
 /useremain/cfw/openssh/sshd_start.sh
 
@@ -32,8 +40,7 @@ ln -s /userdata/app/gk/config/device_account.json /useremain/cfw/nginx/device_ac
 
 # create required directory for nginx
 mkdir /var/cache/nginx
-# change perms to allow script and binary execution
-chmod +x /useremain/nginx/nginx
+
 # start nginx
 /useremain/cfw/nginx/nginx -e /useremain/cfw/nginx/error.log -c /useremain/cfw/nginx/nginx.conf
 # start flask server

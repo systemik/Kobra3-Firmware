@@ -58,13 +58,13 @@ sed -i 's/adbd/adbc/g' /userdata/app/gk/start.sh
 #####################################
 
 # copy new nginx 
-cp -r /useremain/update_swu/nginx /useremain/nginx
+# cp -r /useremain/update_swu/nginx /useremain/nginx
 
 # change perms to allow script and binary execution
-chmod +x /useremain/nginx/nginx
+# chmod +x /useremain/nginx/nginx
 
 # copy libraries to the right place for nginx to work
-cp /useremain/nginx/lib* /ac_lib/lib/third_lib/
+# cp /useremain/nginx/lib* /ac_lib/lib/third_lib/
 
 # create some symbolic link to some interesting files
 # ln -s /userdata/app/gk/printer_mutable.cfg /useremain/nginx/printer_mutable.cfg

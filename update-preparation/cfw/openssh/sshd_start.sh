@@ -1,4 +1,3 @@
-set -x
 #!/bin/sh
 
 key_file_path=/useremain/cfw/openssh/etc
