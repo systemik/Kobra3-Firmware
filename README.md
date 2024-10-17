@@ -1,14 +1,65 @@
-# Kobra3-Firmware - ADB + SSH + BED MESH VISUALIZER(2.3.3.9)
+# Kobra3-Firmware - ADB + SSH + BED MESH VISUALIZER(2.3.3.9) + LIGHT CONTROL + TIMELAPSE ACCESS/CONVERT
 Kobra3 Firmware information and How to update Kobra3 Firmware via USB
 
 > [!WARNING]
 > # USE AT YOUR OWN RISK. I TAKE NO RESPONSABILITY OF WHAT YOU DO WITH BELOW INFORMATION
 > # Latest version tested : 2.3.3.9
 
+This version start adb + ssh on port 2222 and a web server on port 80.
+Web server provide access to 4 pages :
+- Bed leveling info
+- Camera streaming + led control (Mp4 conversion may not work for now)
+- Access to timelapse of the USB stick
+- Upload page to upload gcode to the printer
+
+**Copy** the folder in update-preparation called **aGVscF9zb3Nf** at the **root** of the **usb** stick.
+**Boot** the printer.
+**Wait** a minute and strong **bips** will be emitted.
+**Wait** one more minute and after some more **bips**, the **tetris** song will play.
+After **tetris** song, **reboot** the printer and that's it. You can **connect** to the **web page**.
+
+**Main**
+ 
+![Main](/screenshots/Main.png "Main")
+**Bed**
+ 
+ ![Bed](/screenshots/Bed.png "Bed")
+**Camera**
+ 
+ ![Camera](/screenshots/Camera.png "Camera")
+**Upload**
+ 
+ ![Upload](/screenshots/Upload.png "Upload")
+**Timelapse**
+ 
+ ![Timelapse](/screenshots/Timelapse.png "Timelapse")
+
+---
+**Summary of the steps :**
+
+1) Create update.sh
+2) tar the file to setup.tar
+3) gzip the file to setup.tar.gz
+4) create a folder called update_swu
+5) move the file setup.tar.gz in the folder update_swu
+6) zip the folder update_swu with password U2FsdGVkX19deTfqpXHZnB5GeyQ/dtlbHjkUnwgCi+w=
+7) rename the zip file to update.swu
+8) create a folder on the usb stick called update
+9) put the file update.swu in aGVscF9zb3Nf
+10) boot printer with the stick, depending on your current firmware version, either the printer will update and start bipping or you need to check for update in the printer information menu
+11) do the update
+12) reboot the printer
+13) remove the aGVscF9zb3Nf folder from the usb stick
+14) boot the printer again
+15) test ssh access port 2222 (or adb) and connect to printer ip in http to see the web menu (http://x.x.x.x/)
+
+---
+
+**How to if you want to do it yourself:**
+=======
 Note : Other repository of interest with moonraker and mainsail (untested by me) : https://github.com/utkabobr/DuckPro-Kobra3
 
 **In short:**
-
 
 You need to create a file called "**update.sh**"
 You can put whatever you want (at your onwn risk) in the script file.
@@ -41,24 +92,6 @@ Test if you can connect via SSH again. (**port 2222**)
 > In the folder "update-preparation" you will find the required files and in the "update.swu" you will find a prepackaged update. I invite you to open the update package and check the content before applying it to your printer (opeen swu with 7zip, decompress and use password mentionned above).
 
 ---
-**Summary of the steps :**
-
-1) Create update.sh
-2) tar the file to setup.tar
-3) gzip the file to setup.tar.gz
-4) create a folder called update_swu
-5) move the file setup.tar.gz in the folder update_swu
-6) zip the folder update_swu with password U2FsdGVkX19deTfqpXHZnB5GeyQ/dtlbHjkUnwgCi+w=
-7) rename the zip file to update.swu
-8) create a folder on the usb stick called update
-9) put the file update.swu in aGVscF9zb3Nf
-10) boot printer with the stick, depending on your current version, either the printer will update and start bipping or you need to check for update in the printer information menu
-11) do the update
-12) reboot the printer
-13) remove the aGVscF9zb3Nf folder from the usb stick
-14) boot the printer again
-15) test ssh access port 2222 (or adb) and connect to printer ip in http to see the bed mesh visualizer (http://x.x.x.x/bed)
-
 
 **Windows command lines to create the proper structure for the usb stick :**
 
@@ -70,14 +103,17 @@ Test if you can connect via SSH again. (**port 2222**)
     move update.swu aGVscF9zb3Nf
 
 
-**If you conect to your printer newly installed webserver, you can view the current mesh bed :**
+**If you connect to your printer newly installed webserver, you can view the main page :**
 
-Address: http://x.x.x.x/bed/
+Address: http://x.x.x.x/
+
+
+**BED:**
 
 ![visualizer](/screenshots/visualizer.png "visualizer").
 
 
-**Steps for the update (touch screen) :**
+**Steps for the update (touch screen) on V2.3.3.2 :**
 
 ![step1](/screenshots/attachment.jpg "step1").
   
