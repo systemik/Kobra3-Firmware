@@ -56,6 +56,10 @@ After **tetris** song, **reboot** the printer and that's it. You can **connect**
 ---
 
 **How to if you want to do it yourself:**
+=======
+Note : Other repository of interest with moonraker and mainsail (untested by me) : https://github.com/utkabobr/DuckPro-Kobra3
+
+**In short:**
 
 You need to create a file called "**update.sh**"
 You can put whatever you want (at your onwn risk) in the script file.
