@@ -66,7 +66,7 @@ ln -s /userdata/app/gk/config/device_account.json /useremain/cfw/nginx/device_ac
 #####################################
 
 # change device info to make mopsquitto work
-/useremain/cfw/scripts/update_deviceinfo.sh
+/useremain/cfw/scripts/update-deviceinfo.sh
 
 # copy logs for debug
 cp /tmp/*.log /mnt/udisk/

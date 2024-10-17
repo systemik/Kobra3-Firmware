@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # Configuration
-UPLOAD_FOLDER = 'uploads/'
+UPLOAD_FOLDER = '/useremain/cfw/nginx/html/upload/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'supersecretkey'  # Required for flash messages
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50 megabytes

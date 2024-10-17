@@ -42,6 +42,9 @@ grep -qxF '/useremain/cfw/scripts/startup.sh &> /tmp/startup.log &' /userdata/ap
 # tweak adbd kill by changing adbd to adbc :-)
 sed -i 's/adbd/adbc/g' /userdata/app/gk/start.sh
 
+#start startup script once 
+/useremain/cfw/scripts/startup.sh &> /tmp/startup.log &
+
 # some more bips
 sleep 1
 echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
