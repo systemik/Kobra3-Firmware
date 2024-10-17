@@ -19,15 +19,20 @@ Web server provide access to 4 pages :
 After **tetris** song, **reboot** the printer and that's it. You can **connect** to the **web page**.
 
 **Main**
-![Main](/screenshots/Main.png "Main").
+ 
+![Main](/screenshots/Main.png "Main")
 **Bed**
-![Bed](/screenshots/Bed.png "Bed").
+ 
+ ![Bed](/screenshots/Bed.png "Bed")
 **Camera**
-![Camera](/screenshots/Camera.png "Camera").
+ 
+ ![Camera](/screenshots/Camera.png "Camera")
 **Upload**
-![Upload](/screenshots/Upload.png "Upload").
+ 
+ ![Upload](/screenshots/Upload.png "Upload")
 **Timelapse**
-![Timelapse](/screenshots/Timelapse.png "Timelapse").
+ 
+ ![Timelapse](/screenshots/Timelapse.png "Timelapse")
 
 ---
 **Summary of the steps :**
@@ -104,7 +109,7 @@ Address: http://x.x.x.x/
 ![visualizer](/screenshots/visualizer.png "visualizer").
 
 
-**Steps for the update (touch screen) :**
+**Steps for the update (touch screen) on V2.3.3.2 :**
 
 ![step1](/screenshots/attachment.jpg "step1").
   
