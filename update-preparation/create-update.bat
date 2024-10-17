@@ -3,7 +3,7 @@ echo "Clean previous version" >&2
 rmdir /S /Q update_swu aGVscF9zb3Nf
 
 echo "Create tar.gz and password zip it" >&2 
-tar -cvzf setup.tar.gz update.sh openssh nginx
+tar -cvzf setup.tar.gz update.sh cfw
 mkdir update_swu
 move setup.tar.gz update_swu
 zip -P U2FsdGVkX19deTfqpXHZnB5GeyQ/dtlbHjkUnwgCi+w= -r update.swu update_swu

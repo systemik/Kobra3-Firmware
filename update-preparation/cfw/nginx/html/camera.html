@@ -1,65 +1,210 @@
 <!DOCTYPE html>
-<!-- saved from url=(0039)https://bilibili.github.io/flv.js/demo/ -->
-<html data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <title>flv.js demo (v1.4.0)</title>
-    <link rel="stylesheet" type="text/css" href="demo.css">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kobra 3 Camera</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .mainContainer {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 1200px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        .url-input {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            font-size: 1.1em;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .options label {
+            margin-left: 5px;
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        video {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        input[type="text"][name="seekpoint"] {
+            padding: 10px;
+            font-size: 1em;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            width: 100px;
+        }
+
+        textarea {
+            width: 100%;
+            font-size: 1em;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            resize: none;
+        }
+
+        #output {
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        @media (max-width: 768px) {
+            .mainContainer {
+                width: 95%;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            input[type="text"] {
+                width: 100%;
+            }
+
+            .options {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <script>
-        // Function to call Flask API when the button is clicked
-        function callScript(scriptName) {
-            fetch('/scripts/ + scriptName)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('output').innerText = data.output;
-                })
-                .catch(error => console.error('Error:', error));
-        }
-    </script>
 
     <div class="mainContainer">
-        <div>
-            <div id="streamURL" class="">
-                <div class="url-input">
-                    <label for="sURL">Stream URL:</label>
-                    <input id="sURL" type="text" value="http://192.168.1.233:18088/flv">
-                </div>
-                <div class="options">
-                    <input type="checkbox" id="isLive" onchange="saveSettings()" checked="">
-                    <label for="isLive">isLive</label>
-                    <input type="checkbox" id="withCredentials" onchange="saveSettings()">
-                    <label for="withCredentials">withCredentials</label>
-                    <input type="checkbox" id="hasAudio" onchange="saveSettings()" >
-                    <label for="hasAudio">hasAudio</label>
-                    <input type="checkbox" id="hasVideo" onchange="saveSettings()" checked="">
-                    <label for="hasVideo">hasVideo</label>
-                </div>
-            </div>
+        <h1>FLV.js Demo</h1>
+        
+        <div id="streamURL" class="url-input">
+            <label for="sURL">Stream URL:</label>
+            <input id="sURL" type="text" value="http://192.168.1.233:18088/flv">
         </div>
-        <div class="video-container">
+
+        <div class="options">
             <div>
-                <video name="videoElement" class="centeredVideo" controls="" autoplay="" src="blob:https://bilibili.github.io/9a176c3b-fdf8-439f-bc90-5e08150ddcd0">
-                    Your browser is too old which doesn't support HTML5 video.
-                </video>
+                <input type="checkbox" id="isLive" onchange="saveSettings()" checked>
+                <label for="isLive">isLive</label>
+            </div>
+            <div>
+                <input type="checkbox" id="withCredentials" onchange="saveSettings()">
+                <label for="withCredentials">withCredentials</label>
+            </div>
+            <div>
+                <input type="checkbox" id="hasAudio" onchange="saveSettings()">
+                <label for="hasAudio">hasAudio</label>
+            </div>
+            <div>
+                <input type="checkbox" id="hasVideo" onchange="saveSettings()" checked>
+                <label for="hasVideo">hasVideo</label>
             </div>
         </div>
-        <div class="nothidden">
-            <div class="controls" >
-                <button onclick="flv_load()">Load</button>
-                <button onclick="flv_start()">Start</button>
-                <button onclick="flv_pause()">Pause</button>
-                <button onclick="flv_destroy()">Destroy</button>
-                <input style="width:100px" type="text" name="seekpoint">
-                <button onclick="flv_seekto()">SeekTo</button>
-            </div>
+
+        <div class="video-container">
+            <video name="videoElement" class="centeredVideo" controls autoplay>
+                Your browser is too old to support HTML5 video.
+            </video>
         </div>
-        <textarea name="logcatbox" class="logcatBox" rows="10" readonly=""></textarea>
+
+        <div class="controls">
+            <button onclick="flv_load()">Load</button>
+            <button onclick="flv_start()">Start</button>
+            <button onclick="flv_pause()">Pause</button>
+            <button onclick="flv_destroy()">Destroy</button>
+            <input type="text" name="seekpoint" placeholder="Seek to">
+            <button onclick="flv_seekto()">SeekTo</button>
+        </div>
+
+        <textarea name="logcatbox" class="logcatBox" rows="10" readonly></textarea>
+
+        <div id="output"></div>
+
+        <div class="controls">
+            <button onclick="callScript('ntp-update.sh')">Update NTP (Date Time)</button>
+            <button onclick="callScript('capture-start.sh')">Start Streaming</button>
+            <button onclick="callScript('capture-stop.sh')">Stop Streaming</button>
+            <button onclick="callScript('led-on.sh')">Start LED</button>
+            <button onclick="callScript('led-off.sh')">Stop LED</button>
+            <button onclick="callScript('convert-timelapse.sh')">Convert Timelapse</button>
+        </div>
     </div>
 
     <script src="flv.js"></script>
-    
+
     <script>
         var checkBoxFields = ['isLive', 'withCredentials', 'hasAudio', 'hasVideo'];
         var streamURL, mediaSourceURL;
@@ -202,12 +347,7 @@
         });
     </script>
 
-    <button onclick="callScript('ntp-update.sh')">Update NTP (Date Time)</button>
-    <button onclick="callScript('capture-start.sh')">Start Streaming</button>
-    <button onclick="callScript('capture-stop.sh')">Stop Streaming</button>
-    <button onclick="callScript('led-on.sh')">Start LED</button>
-    <button onclick="callScript('led-off.sh')">Stop LED</button>
-    
+  
     <pre id="output"></pre>  <!-- The output will be displayed here -->
 
 
@@ -235,7 +375,7 @@
             eventSource.close();  // Close the connection on error
         };
     }
-</script>
+    </script>
 
-
-</body></html>
+</body>
+</html>

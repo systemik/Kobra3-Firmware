@@ -4,19 +4,19 @@ key_file_path=/useremain/cfw/openssh/etc
 
 if [ ! -f "$key_file_path/ssh_host_rsa_key" ]
 then
-    echo "ssh_host_rsa_key file no exit, creating..."
+    echo "ssh_host_rsa_key file not exist, creating..."
     /useremain/cfw/openssh/bin/ssh-keygen -t rsa -f $key_file_path/ssh_host_rsa_key -N ""
 fi
 
 if [ ! -f "$key_file_path/ssh_host_ecdsa_key" ]
 then
-    echo "ssh_host_ecdsa_key file no exit, creating..."
+    echo "ssh_host_ecdsa_key file not exist, creating..."
     /useremain/cfw/openssh/bin/ssh-keygen -t rsa -f $key_file_path/ssh_host_ecdsa_key -N ""
 fi
 
 if [ ! -f "$key_file_path/ssh_host_ed25519_key" ]
 then
-    echo "ssh_host_ed25519_key file no exit, creating..."
+    echo "ssh_host_ed25519_key file not exist, creating..."
     /useremain/cfw/openssh/bin/ssh-keygen -t rsa -f $key_file_path/ssh_host_ed25519_key -N ""
 fi
 
@@ -36,8 +36,5 @@ fi
 
 sync
 
-# chown -R root:root /var/empty
-# chmod 755 /var/empty
-
-/useremain/openssh/sbin/sshd -f /useremain/openssh/etc/sshd_config -p 2222
+/useremain/cfw/openssh/sbin/sshd -f /useremain/cfw/openssh/etc/sshd_config -p 2222
 

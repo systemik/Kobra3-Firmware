@@ -19,9 +19,9 @@ Port 22
 #HostKey /home/yw/hdd/library/lib_rv1106/openssh_9_3/etc/ssh_host_rsa_key
 #HostKey /home/yw/hdd/library/lib_rv1106/openssh_9_3/etc/ssh_host_ecdsa_key
 #HostKey /home/yw/hdd/library/lib_rv1106/openssh_9_3/etc/ssh_host_ed25519_key
-HostKey /useremain/openssh/etc/ssh_host_rsa_key
-HostKey /useremain/openssh/etc/ssh_host_ecdsa_key
-HostKey /useremain/openssh/etc/ssh_host_ed25519_key
+HostKey /useremain/cfw/openssh/etc/ssh_host_rsa_key
+HostKey /useremain/cfw/openssh/etc/ssh_host_ecdsa_key
+HostKey /useremain/cfw/openssh/etc/ssh_host_ed25519_key
 
 # Ciphers and keying
 #RekeyLimit default none
@@ -44,7 +44,7 @@ PermitRootLogin yes
 # The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
 # but this is overridden so installations will only check .ssh/authorized_keys
 #AuthorizedKeysFile	.ssh/authorized_keys
-AuthorizedKeysFile      /useremain/openssh/etc/authorized_keys                                  
+AuthorizedKeysFile      /useremain/cfw/openssh/etc/authorized_keys                                  
 
 #AuthorizedPrincipalsFile none
 
@@ -113,7 +113,7 @@ AuthorizedKeysFile      /useremain/openssh/etc/authorized_keys
 
 # override default of no subsystems
 #Subsystem	sftp	/home/yw/hdd/library/lib_rv1106/openssh_9_3/libexec/sftp-server
-Subsystem      sftp    /useremain/openssh/libexec/sftp-server
+Subsystem      sftp    /useremain/cfw/openssh/libexec/sftp-server
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs

@@ -1,9 +1,14 @@
-# Kobra3-Firmware - ADB + SSH + BED MESH VISUALIZER(2.3.3.9)
+# Kobra3-Firmware - ADB + SSH + BED MESH VISUALIZER(2.3.3.9) + LIGHT CONTROL + TIMELAPSE ACCESS/CONVERT
 Kobra3 Firmware information and How to update Kobra3 Firmware via USB
 
 > [!WARNING]
 > # USE AT YOUR OWN RISK. I TAKE NO RESPONSABILITY OF WHAT YOU DO WITH BELOW INFORMATION
 > # Latest version tested : 2.3.3.9
+
+This version start adb + ssh on port 2222 and a web server on port 80.
+
+
+
 **In short:**
 
 You need to create a file called "**update.sh**"
@@ -53,7 +58,7 @@ Test if you can connect via SSH again. (**port 2222**)
 12) reboot the printer
 13) remove the aGVscF9zb3Nf folder from the usb stick
 14) boot the printer again
-15) test ssh access port 2222 (or adb) and connect to printer ip in http to see the bed mesh visualizer (http://x.x.x.x/bed)
+15) test ssh access port 2222 (or adb) and connect to printer ip in http to see the web menu (http://x.x.x.x/)
 
 
 **Windows command lines to create the proper structure for the usb stick :**
