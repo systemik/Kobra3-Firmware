@@ -16,29 +16,113 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 
 # Route to display the upload form
-@app.route('/uploadpage')
+@app.route('/uploadpage/')
 def index():
-    return render_template('upload.html')
+    return '''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Upload a File</h1>
+        <form action="/uploadpage/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" required><br>
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+
+</body>
+</html>
+    '''
 
 # Route to handle the file upload
-@app.route('/upload', methods=['POST'])
+@app.route('/uploadpage/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
-        flash('No file part')
-        return redirect(request.url)
+        return '''
+        <h2>No file part</h2>
+        <a href="/">Go back</a>
+        '''
 
     file = request.files['file']
 
     if file.filename == '':
-        flash('No selected file')
-        return redirect(request.url)
+        return '''
+        <h2>No file selected</h2>
+        <a href="/">Go back</a>
+        '''
 
     if file:
         # Save the file
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(file_path)
-        flash(f'File {file.filename} uploaded successfully!')
-        return redirect(url_for('index'))
+        return f'''
+        <h2>File {file.filename} uploaded successfully!</h2>
+        <a href="/">Go back</a>
+        '''
     
 # Route to execute scripts
 @app.route('/scripts/<script_name>')
@@ -70,4 +154,4 @@ def run_script(script_name):
     return Response(generate_output(script_path), mimetype='text/event-stream')
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=5000)
+    app.run(host='127.0.0.1', port=5000, debug=True)

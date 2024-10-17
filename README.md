@@ -18,6 +18,17 @@ Web server provide access to 4 pages :
 **Wait** one more minute and after some more **bips**, the **tetris** song will play.
 After **tetris** song, **reboot** the printer and that's it. You can **connect** to the **web page**.
 
+**Main**
+![Main](/screenshots/Main.png "Main").
+**Bed**
+![Bed](/screenshots/Bed.png "Bed").
+**Camera**
+![Camera](/screenshots/Camera.png "Camera").
+**Upload**
+![Upload](/screenshots/Upload.png "Upload").
+**Timelapse**
+![Timelapse](/screenshots/Timelapse.png "Timelapse").
+
 ---
 **Summary of the steps :**
 

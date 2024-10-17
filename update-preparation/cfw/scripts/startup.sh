@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Sleep a bit
-sleep 10
+sleep 5
 
 # kill previously started apps
 killall nginx
