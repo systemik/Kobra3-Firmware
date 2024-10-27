@@ -4,7 +4,9 @@
 > # NEW METHOD IMPLEMENTED WITH MJPG-STREAMER
 > # NOT DOCUMENTED YET
 
+The new method allow to acces the camera in the mainsail interface with the following url : http://x.x.x.x:8080/?action=stream
 
+![Stream Mainsail](Mainsail-Conf.jpeg "Stream Mainsail").
 
 Camera is managed via the **gkapp** in the printer.
 
