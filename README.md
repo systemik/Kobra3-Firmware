@@ -5,7 +5,8 @@ Kobra3 Firmware information and How to update Kobra3 Firmware via USB
 > # USE AT YOUR OWN RISK. I TAKE NO RESPONSABILITY OF WHAT YOU DO WITH BELOW INFORMATION
 > # Latest version tested : 2.3.3.9
 
-This version start adb + ssh on port 2222 and a web server on port 80.
+This version start adb + ssh on port **2222** and a web server on port **8000**.
+Web port has been changed to allow use of these tweaks in parallel to the other custom firmware with mainsail.
 Web server provide access to 4 pages :
 - Bed leveling info
 - Camera streaming + led control (Mp4 conversion may not work for now)
@@ -51,7 +52,7 @@ After **tetris** song, **reboot** the printer and that's it. You can **connect**
 12) reboot the printer
 13) remove the aGVscF9zb3Nf folder from the usb stick
 14) boot the printer again
-15) test ssh access port 2222 (or adb) and connect to printer ip in http to see the web menu (http://x.x.x.x/)
+15) test ssh access port 2222 (or adb) and connect to printer ip in http to see the web menu (http://x.x.x.x:8000/)
 
 ---
 
@@ -105,7 +106,7 @@ Test if you can connect via SSH again. (**port 2222**)
 
 **If you connect to your printer newly installed webserver, you can view the main page :**
 
-Address: http://x.x.x.x/
+Address: http://x.x.x.x:8000/
 
 
 **BED:**

@@ -1,5 +1,11 @@
 # Kobra 3 Camera info
 
+> [!WARNING]
+> # NEW METHOD IMPLEMENTED WITH MJPG-STREAMER
+> # NOT DOCUMENTED YET
+
+
+
 Camera is managed via the **gkapp** in the printer.
 
 This app is streaming video with the **flv** protocol (Flash Video often used in chinese products).

@@ -3,6 +3,10 @@ You can connect to MQTT on port 9338
 
 ![mqtt](/mqtt/mqtt.png "mqtt").
 
+There is a way (WIP) to run a mqtt bridge with websocket and interface a webpage with the printer.
+Webpage with mqtt javascript library -> mosquitto bridge with websocket enabled -> mqtt printer broker
+This allow to subscribe and publish to printer topics.
+
 
 Here are few topic and what needs to be posted to them to execute an action:
 
