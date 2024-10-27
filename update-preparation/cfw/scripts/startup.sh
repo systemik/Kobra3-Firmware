@@ -6,12 +6,17 @@ sleep 5
 # kill previously started apps
 killall nginx
 killall python3.11
+killall mjpg_streamer
 
 # add library folder
-export LD_LIBRARY_PATH=/useremain/cfw/libs:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/useremain/cfw/libs:/useremain/cfw/libs/mjpg-streamer:$LD_LIBRARY_PATH
 
 # add binary folder
 export PATH=/useremain/cfw/binaries:$PATH
+
+# add HOME folder
+export HOME=/useremain/cfw
+
 
 # change perms to allow script and binary execution
 chmod +x /useremain/cfw/binaries/*
@@ -37,9 +42,9 @@ chmod +x /useremain/cfw/openssh/sshd_start.sh
 #####################################
 
 # create some symbolic link to some interesting files
-ln -s /userdata/app/gk/printer_mutable.cfg /useremain/cfw/nginx/printer_mutable.cfg
-ln -s /userdata/app/gk/printer.cfg /useremain/cfw/nginx/printer.cfg
-ln -s /userdata/app/gk/config/device_account.json /useremain/cfw/nginx/device_account.cfg
+ln -s /userdata/app/gk/printer_mutable.cfg /useremain/cfw/nginx/html/printer_mutable.cfg
+ln -s /userdata/app/gk/printer.cfg /useremain/cfw/nginx/html/printer.cfg
+ln -s /userdata/app/gk/config/device_account.json /useremain/cfw/nginx/html/device_account.cfg
 ln -s /mnt/udisk/Time-lapse-Video/ /useremain/cfw/nginx/html/timelapse
 ln -s /useremain/app/gk/gcodes/ /useremain/cfw/nginx/html/upload
 
@@ -52,14 +57,21 @@ mkdir /var/cache/nginx
 /useremain/cfw/binaries/python3.11 /useremain/cfw/scripts/flask-server.py &> /tmp/flask.log &
 
 # clean previous symbolic links to configuration files
-rm /useremain/cfw/nginx/printer_mutable.cfg
-rm /useremain/cfw/nginx/printer.cfg
-rm /useremain/cfw/nginx/device_account.cfg
+rm /useremain/cfw/nginx/html/printer_mutable.cfg
+rm /useremain/cfw/nginx/html/printer.cfg
+rm /useremain/cfw/nginx/html/device_account.cfg
 
 # create some symbolic link to some interesting files
 ln -s /userdata/app/gk/printer_mutable.cfg /useremain/cfw/nginx/printer_mutable.cfg
 ln -s /userdata/app/gk/printer.cfg /useremain/cfw/nginx/printer.cfg
 ln -s /userdata/app/gk/config/device_account.json /useremain/cfw/nginx/device_account.cfg
+
+
+#####################################
+########## CAMERA STREAM ############
+#####################################
+
+/useremain/cfw/binaries/mjpg_streamer -i "input_uvc.so -d /dev/video10 -f 10" &
 
 #####################################
 ############ FEW THINGS #############

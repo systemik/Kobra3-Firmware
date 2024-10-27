@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kobra 3 Camera</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .mainContainer {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 1200px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        .url-input {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            font-size: 1.1em;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .options label {
+            margin-left: 5px;
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        video {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        input[type="text"][name="seekpoint"] {
+            padding: 10px;
+            font-size: 1em;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            width: 100px;
+        }
+
+        textarea {
+            width: 100%;
+            font-size: 1em;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            resize: none;
+        }
+
+        #output {
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        @media (max-width: 768px) {
+            .mainContainer {
+                width: 95%;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            input[type="text"] {
+                width: 100%;
+            }
+
+            .options {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="mainContainer">
+        <h1>Kobra 3 Camera</h1>
+        
+        <div id="streamURL" class="url-input">
+            <label for="sURL">Stream URL (put your printer ip here):</label>
+            <input id="sURL" type="text" value="http://192.168.1.233:18088/flv">
+        </div>
+
+        <div class="options">
+            <div>
+                <input type="checkbox" id="isLive" onchange="saveSettings()" checked>
+                <label for="isLive">isLive</label>
+            </div>
+            <div>
+                <input type="checkbox" id="withCredentials" onchange="saveSettings()">
+                <label for="withCredentials">withCredentials</label>
+            </div>
+            <div>
+                <input type="checkbox" id="hasAudio" onchange="saveSettings()">
+                <label for="hasAudio">hasAudio</label>
+            </div>
+            <div>
+                <input type="checkbox" id="hasVideo" onchange="saveSettings()" checked>
+                <label for="hasVideo">hasVideo</label>
+            </div>
+        </div>
+
+        <div class="video-container">
+            <video name="videoElement" class="centeredVideo" controls autoplay>
+                Your browser is too old to support HTML5 video.
+            </video>
+        </div>
+
+        <div class="controls">
+            <button onclick="flv_load()">Load</button>
+            <button onclick="flv_start()">Start</button>
+            <button onclick="flv_pause()">Pause</button>
+            <button onclick="flv_destroy()">Destroy</button>
+            <input type="text" name="seekpoint" placeholder="Seek to">
+            <button onclick="flv_seekto()">SeekTo</button>
+        </div>
+
+        <textarea name="logcatbox" class="logcatBox" rows="10" readonly></textarea>
+
+        <div id="output"></div>
+
+        <div class="controls">
+            <button onclick="callScript('ntp-update.sh')">Update NTP (Date Time)</button>
+            <button onclick="callScript('capture-start.sh')">Start Streaming</button>
+            <button onclick="callScript('capture-stop.sh')">Stop Streaming</button>
+            <button onclick="callScript('led-on.sh')">Start LED</button>
+            <button onclick="callScript('led-off.sh')">Stop LED</button>
+            <button onclick="callScript('convert-timelapse.sh')">Convert Timelapse</button>
+        </div>
+    </div>
+
+    <script src="flv.js"></script>
+
+    <script>
+        var checkBoxFields = ['isLive', 'withCredentials', 'hasAudio', 'hasVideo'];
+        var streamURL, mediaSourceURL;
+
+        function flv_load() {
+            console.log('isSupported: ' + flvjs.isSupported());
+            
+            var i;
+            var mediaDataSource = {
+                type: 'flv'
+            };
+            for (i = 0; i < checkBoxFields.length; i++) {
+                var field = checkBoxFields[i];
+                /** @type {HTMLInputElement} */
+                var checkbox = document.getElementById(field);
+                mediaDataSource[field] = checkbox.checked;
+            }
+            mediaDataSource['url'] = document.getElementById('sURL').value;
+            console.log('MediaDataSource', mediaDataSource);
+            flv_load_mds(mediaDataSource);
+            
+        }
+
+        function flv_load_mds(mediaDataSource) {
+            var element = document.getElementsByName('videoElement')[0];
+            if (typeof player !== "undefined") {
+                if (player != null) {
+                    player.unload();
+                    player.detachMediaElement();
+                    player.destroy();
+                    player = null;
+                }
+            }
+            player = flvjs.createPlayer(mediaDataSource, {
+                enableWorker: false,
+                lazyLoadMaxDuration: 3 * 60,
+                seekType: 'range',
+            });
+            player.attachMediaElement(element);
+            player.load();
+        }
+
+        function flv_start() {
+            player.play();
+        }
+
+        function flv_pause() {
+            player.pause();
+        }
+
+        function flv_destroy() {
+            player.pause();
+            player.unload();
+            player.detachMediaElement();
+            player.destroy();
+            player = null;
+        }
+
+        function flv_seekto() {
+            var input = document.getElementsByName('seekpoint')[0];
+            player.currentTime = parseFloat(input.value);
+        }
+
+        function switch_url() {
+            streamURL.className = '';
+            saveSettings();
+        }
+
+
+        function ls_get(key, def) {
+            try {
+                var ret = localStorage.getItem('flvjs_demo.' + key);
+                if (ret === null) {
+                    ret = def;
+                }
+                return ret;
+            } catch (e) {}
+            return def;
+        }
+
+        function ls_set(key, value) {
+            try {
+                localStorage.setItem('flvjs_demo.' + key, value);
+            } catch (e) {}
+        }
+
+        function saveSettings() {
+
+            ls_set('inputMode', 'StreamURL');
+
+            var i;
+            for (i = 0; i < checkBoxFields.length; i++) {
+                var field = checkBoxFields[i];
+                /** @type {HTMLInputElement} */
+                var checkbox = document.getElementById(field);
+                ls_set(field, checkbox.checked ? '1' : '0');
+            }
+            var sURL = document.getElementById('sURL');
+            ls_set('sURL', sURL.value);
+            console.log('save');
+        }
+
+        function loadSettings() {
+            var i;
+            for (i = 0; i < checkBoxFields.length; i++) {
+                var field = checkBoxFields[i];
+                /** @type {HTMLInputElement} */
+                var checkbox = document.getElementById(field);
+                var c = ls_get(field, checkbox.checked ? '1' : '0');
+                checkbox.checked = c === '1' ? true : false;
+            }
+
+            var msURL = document.getElementById('msURL');
+            var sURL = document.getElementById('sURL');
+            sURL.value = ls_get('sURL', sURL.value);
+            if (ls_get('inputMode', 'StreamURL') === 'StreamURL') {
+                switch_url();
+            } else {
+                switch_mds();
+            }
+        }
+
+        function showVersion() {
+            var version = flvjs.version;
+            document.title = document.title + " (v" + version + ")";
+        }
+
+        var logcatbox = document.getElementsByName('logcatbox')[0];
+        flvjs.LoggingControl.addLogListener(function(type, str) {
+            logcatbox.value = logcatbox.value + str + '\n';
+            logcatbox.scrollTop = logcatbox.scrollHeight;
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            streamURL = document.getElementById('streamURL');
+            mediaSourceURL = document.getElementById('mediaSourceURL');
+            loadSettings();
+            showVersion();
+            flv_load();
+        });
+    </script>
+
+  
+    <pre id="output"></pre>  <!-- The output will be displayed here -->
+
+
+    <script>
+    // Function to call Flask API when the button is clicked
+    function callScript(scriptName) {
+        const eventSource = new EventSource('/scripts/' + scriptName);
+        const outputElement = document.getElementById('output');
+        outputElement.innerText = "";  // Clear any previous output
+
+        // Event listener for incoming messages (script output)
+        eventSource.onmessage = function(event) {
+            // Append the output to the element
+            outputElement.innerText += event.data + '\n';
+
+            // Check for error message and close the connection
+            if (event.data.startsWith("ERROR:")) {
+                eventSource.close();
+            }
+        };
+
+        // Event listener for any errors during the connection
+        eventSource.onerror = function(event) {
+            outputElement.innerText += 'Connection error!\n';
+            eventSource.close();  // Close the connection on error
+        };
+    }
+    </script>
+
+</body>
+</html>
