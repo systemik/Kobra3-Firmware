@@ -22,6 +22,10 @@ export HOME=/useremain/cfw
 chmod +x /useremain/cfw/binaries/*
 chmod +x /useremain/cfw/scripts/*
 chmod +x /useremain/cfw/nginx/nginx
+chmod +x /useremain/cfw/openssh/sshd_start.sh
+chmod +x /useremain/cfw/openssh/sbin/sshd
+chmod +x /useremain/cfw/openssh/bin/ssh-keygen
+chmod +x /useremain/cfw/openssh/libexec/sftp-server
 
 # Sync time
 /useremain/cfw/binaries/ntpdate pool.ntp.org

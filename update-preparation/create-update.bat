@@ -1,7 +1,9 @@
 @echo off
 echo "Clean previous version" >&2 
 rmdir /S /Q update_swu aGVscF9zb3Nf
-
+echo "Ensure scriptws are in unix format"
+dos2unix.exe .\cfw\scripts\*
+dos2unix.exe update.sh
 echo "Create tar.gz and password zip it" >&2 
 tar -cvzf setup.tar.gz update.sh cfw
 mkdir update_swu
