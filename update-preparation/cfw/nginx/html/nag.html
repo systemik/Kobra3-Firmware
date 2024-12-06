@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kobra 3 Camera</title>
+    <title>Welcome to Kobra 3</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -160,28 +160,17 @@
 
     </style>
 </head>
-
 <body>
 
-    <div class="mainContainer">
-        <h1>Kobra 3 Camera</h1>
+    <div class="container">
+        <h1>Remove nag screen custom firmware (V2.3.5.3 only)</h1>
+        <p>Setting will be active after reboot of the printer</p>
 
-        <div id="embed-container">
-            <!-- Embed another page using iframe -->
-            <iframe id="embedded-iframe" src="http://192.168.1.233:8080/?action=stream"></iframe>
-        </div>
-
-        <div id="output"></div>
-
-        <div class="controls">
-            <button onclick="callScript('led-on.sh')">Start LED</button>
-            <button onclick="callScript('led-off.sh')">Stop LED</button>
-            <button onclick="callScript('convert-timelapse.sh')">Convert Timelapse</button>
-	    <button onclick="callScript('usemjpg.sh')">Use MJPG Streamer (refresh page after click)</button>
-	    <button onclick="callScript('usegkcam.sh')">Use GKCAM (Stream will not work here)</button>
+        <div class="links">
+	    <button onclick="callScript('patch-nag-cfw.sh')">Remove nag</button>
+	    <button onclick="callScript('patch-nag-cfw-revert.sh')">Put back nag</button>
         </div>
     </div>
-  
     <pre id="output"></pre>  <!-- The output will be displayed here -->
 
 
@@ -204,20 +193,6 @@
         };
     }
     </script>
-
-<script>
-    window.onload = function() {
-    const iframe = document.getElementById('embedded-iframe');
-    const iframeContent = iframe.contentWindow.document;
-
-    // Apply styles to the iframe's body content
-    iframeContent.body.style.display = 'flex';
-    iframeContent.body.style.justifyContent = 'center';
-    iframeContent.body.style.alignItems = 'center';
-    iframeContent.body.style.minHeight = '100vh';
-    iframeContent.body.style.textAlign = 'center';
-  };
-</script>
 
 </body>
 </html>

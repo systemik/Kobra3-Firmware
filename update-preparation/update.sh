@@ -52,7 +52,7 @@ sleep 2
 echo 0 > /sys/class/pwm/pwmchip0/pwm0/enable
 
 # tetris success song
-export LD_LIBRARY_PATH=/useremain/cfw/libs:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/useremain/cfw/libs:/useremain/cfw/libs/mjpg-streamer:$LD_LIBRARY_PATH
 /useremain/cfw/binaries/python3.11 /useremain/cfw/scripts/tetris.py
 
 mv /mnt/udisk/aGVscF9zb3Nf /mnt/udisk/aGVscF9zb3Nf-applied
