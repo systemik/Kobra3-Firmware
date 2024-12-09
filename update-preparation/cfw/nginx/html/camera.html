@@ -177,6 +177,8 @@
             <button onclick="callScript('led-on.sh')">Start LED</button>
             <button onclick="callScript('led-off.sh')">Stop LED</button>
             <button onclick="callScript('convert-timelapse.sh')">Convert Timelapse</button>
+	    <button onclick="callScript('usemjpg.sh')">Use MJPG Streamer (refresh page after click)</button>
+	    <button onclick="callScript('usegkcam.sh')">Use GKCAM (Stream will not work here)</button>
         </div>
     </div>
   
@@ -199,12 +201,6 @@
             if (event.data.startsWith("ERROR:")) {
                 eventSource.close();
             }
-        };
-
-        // Event listener for any errors during the connection
-        eventSource.onerror = function(event) {
-            outputElement.innerText += 'Connection error!\n';
-            eventSource.close();  // Close the connection on error
         };
     }
     </script>

@@ -1,12 +1,10 @@
-# Kobra3-Firmware - ADB + SSH + BED MESH VISUALIZER(2.3.3.9) + LIGHT CONTROL + TIMELAPSE ACCESS/CONVERT
+# Kobra3-Firmware - ADB + SSH + BED MESH VISUALIZER(2.3.3.9) + MJPG STREAMER + LIGHT CONTROL + TIMELAPSE ACCESS/CONVERT + REMOVE NAG SCREEN CUSTOM FIRMWARE
 Kobra3 Firmware information and How to update Kobra3 Firmware via USB
 
-> [!CAUTION]
-> # NOT YET TESTED WITH 2.3.5.3. PLEASE DO NOT USE ON THIS VERSION BEFORE THIS IS TESTED.
 
 > [!WARNING]
 > # USE AT YOUR OWN RISK. I TAKE NO RESPONSABILITY OF WHAT YOU DO WITH BELOW INFORMATION
-> # Latest version tested : 2.3.3.9
+> # Latest version tested : 2.3.5.3
 
 This version start adb + ssh on port **2222** and a web server on port **8000**.
 Web port has been changed to allow use of these tweaks in parallel to the other custom firmware with mainsail.
@@ -18,9 +16,11 @@ Web server provide access to 4 pages :
 
 **Copy** the folder in update-preparation called **aGVscF9zb3Nf** at the **root** of the **usb** stick.
 **Boot** the printer.
-**Wait** a minute and strong **bips** will be emitted.
-**Wait** one more minute and after some more **bips**, the **tetris** song will play.
-After **tetris** song, **reboot** the printer and that's it. You can **connect** to the **web page**.
+**Insert the usb key** the printer will emit a bip after 5 seconds
+**Wait** after 30 seconds **three bips** will be emitted.
+**Wait** 30 more seconds and after a **long bip**, the **tetris** song will play.
+After **tetris** song, **reboot** the printer and that's it. You can **connect** to the **web page on port 8000** or to **ssh on port 2222** or to **adb**
+
 
 **Main**
  
@@ -111,6 +111,10 @@ Test if you can connect via SSH again. (**port 2222**)
 
 Address: http://x.x.x.x:8000/
 
+
+**If you want to read the log pack created by a printer on the USB stcik when something goes wrong:**
+
+AC_LOG.pack password :  2YLVrATRvUEnMeXk6Vtc7qxfzYM4TJzrLnEBma8zpUKeGtseGWqp4LXs7e8KeU2u
 
 **BED:**
 
