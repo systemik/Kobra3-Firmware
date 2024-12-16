@@ -14,6 +14,12 @@ For this, you need to download firmware from anycubic cloud :
 
 **2.3.3.9** : https://cdn.cloud-universe.anycubic.com/attachment/1826082241870905345_sz3boql8.swu
 
+**2.3.5.3** : https://cdn.cloud-universe.anycubic.com/attachment/1853397792578793474_dodxlz90.swu
+
+**ACE Firmware ACE_V1.3.84** : https://cdn.cloud-universe.anycubic.com/attachment/1853391104912060418_96sbepqa.swu
+
+
+
 Once you have downloaded the firmware, you need to rename the downloaded file to "update.swu"
 
 Then you need to create a folder at the root of your USB drive and copy the update.swu in it.
@@ -28,3 +34,4 @@ After the printer fix, you must reconfigure wifi and do a factory reset via the 
 
 
 ![failure](failure.jpg "failure").
+

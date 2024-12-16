@@ -45,13 +45,6 @@ chmod +x /useremain/cfw/openssh/sshd_start.sh
 ########## NGINX WEBSERVER ##########
 #####################################
 
-# create some symbolic link to some interesting files
-ln -s /userdata/app/gk/printer_mutable.cfg /useremain/cfw/nginx/html/printer_mutable.cfg
-ln -s /userdata/app/gk/printer.cfg /useremain/cfw/nginx/html/printer.cfg
-ln -s /userdata/app/gk/config/device_account.json /useremain/cfw/nginx/html/device_account.cfg
-ln -s /mnt/udisk/Time-lapse-Video/ /useremain/cfw/nginx/html/timelapse
-ln -s /useremain/app/gk/gcodes/ /useremain/cfw/nginx/html/upload
-
 # create required directory for nginx
 mkdir /var/cache/nginx
 
@@ -66,10 +59,11 @@ rm /useremain/cfw/nginx/html/printer.cfg
 rm /useremain/cfw/nginx/html/device_account.cfg
 
 # create some symbolic link to some interesting files
-ln -s /userdata/app/gk/printer_mutable.cfg /useremain/cfw/nginx/printer_mutable.cfg
-ln -s /userdata/app/gk/printer.cfg /useremain/cfw/nginx/printer.cfg
-ln -s /userdata/app/gk/config/device_account.json /useremain/cfw/nginx/device_account.cfg
-
+ln -s /userdata/app/gk/printer_mutable.cfg /useremain/cfw/nginx/html/printer_mutable.cfg
+ln -s /userdata/app/gk/printer.cfg /useremain/cfw/nginx/html/printer.cfg
+ln -s /userdata/app/gk/config/device_account.json /useremain/html/cfw/nginx/device_account.cfg
+ln -s /mnt/udisk/Time-lapse-Video/ /useremain/cfw/nginx/html/timelapse
+ln -s /useremain/app/gk/gcodes/ /useremain/cfw/nginx/html/upload
 
 #####################################
 ########## CAMERA STREAM ############
