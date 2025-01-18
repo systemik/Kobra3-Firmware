@@ -168,7 +168,15 @@
 
         <div id="embed-container">
             <!-- Embed another page using iframe -->
-            <iframe id="embedded-iframe" src="http://192.168.1.233:8080/?action=stream"></iframe>
+            <iframe id="camera-iframe"></iframe>
+            <script>
+              // Get the current host/ip for the frame automatically
+              const hostname = window.location.hostname;
+              const iframe = document.getElementById("camera-iframe");
+
+              // Set the iframe src dynamically using the current hostname
+              iframe.src = `http://${hostname}:8080/?action=stream`;
+            </script>
         </div>
 
         <div id="output"></div>
