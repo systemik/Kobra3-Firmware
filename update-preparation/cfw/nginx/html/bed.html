@@ -85,7 +85,6 @@
 	
 	<pre id="resultMatrix" hidden="true"></pre>
 
-	<button id="invert-button">Invert Points</button>
 
 	<script>
 		// Function to parse the matrix from textarea
@@ -149,28 +148,6 @@
 			document.getElementById('mesh-0-input').value = finalMatrix.map(row => row.join(', ')).join('\n');
 
 		}
-
-		function invertPoints(textareaId) {
-			const textarea = document.getElementById(textareaId);
-			const points = textarea.value;
-
-			// Replace the "\n" with actual line breaks and split into lines
-			const lines = points.split('\n');
-
-			// Reverse the order of points on each line
-			const invertedLines = lines.map(line => line.split(', ').reverse().join(', '));
-
-			// Join the inverted lines back into a single string with line breaks
-			const formattedPoints = invertedLines.join('\n');
-
-			// Update the textarea with the inverted points
-			textarea.value = formattedPoints;
-		}
-
-		document.getElementById('invert-button').addEventListener('click', () => {
-			invertPoints('mesh-0-input');
-			invertPoints('mesh-example-input');
-		});
 		</script>
 
 
@@ -202,8 +179,15 @@
 			// Extract the "points" value from the "bed_mesh default" object
 			const points = data["bed_mesh default"].points;
 
-			// Replace the "\n" with actual line breaks
-			const formattedPoints = points.replace(/\\n/g, '\n');
+			// Replace the "\n" with actual line breaks and split into lines
+			const lines = points.split('\n');
+
+			// Reverse the order of points on each line
+			// See https://github.com/systemik/Kobra3-Firmware/issues/29
+			const invertedLines = lines.map(line => line.split(', ').reverse().join(', '));
+
+			// Join the inverted lines back into a single string with line breaks
+			const formattedPoints = invertedLines.join('\n');
 
 			// Display the formatted points in the multiline text box
 			document.getElementById('mesh-0-input').value = formattedPoints;
