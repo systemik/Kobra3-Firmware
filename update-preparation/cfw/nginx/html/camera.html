@@ -152,7 +152,7 @@
         border: 1px solid #ddd;
         }
 
-        #embedded-iframe {
+        #camera-iframe {
         width: 100%;
         height: 100%;
         border: none;
@@ -176,7 +176,7 @@
               const iframe = document.getElementById("camera-iframe");
 
               // Set the iframe src dynamically using the current hostname
-              iframe.src = `${protocol}://${hostname}:8080/?action=stream`;
+              iframe.src = `${protocol}//${hostname}:8080/?action=stream`;
             </script>
         </div>
 
@@ -216,7 +216,7 @@
 
 <script>
     window.onload = function() {
-    const iframe = document.getElementById('embedded-iframe');
+    const iframe = document.getElementById('camera-iframe');
     const iframeContent = iframe.contentWindow.document;
 
     // Apply styles to the iframe's body content
