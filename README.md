@@ -4,7 +4,7 @@ Kobra3 Firmware information and How to update Kobra3 Firmware via USB
 
 > [!WARNING]
 > # USE AT YOUR OWN RISK. I TAKE NO RESPONSABILITY OF WHAT YOU DO WITH BELOW INFORMATION
-> # Latest version tested : 2.3.5.3
+> # Latest version tested : 2.3.8.9
 
 This version start adb + ssh on port **2222** and a web server on port **8000**.
 Web port has been changed to allow use of these tweaks in parallel to the other custom firmware with mainsail.
@@ -48,7 +48,7 @@ After **tetris** song, **reboot** the printer and that's it. You can **connect**
 5) move the file setup.tar.gz in the folder update_swu
 6) zip the folder update_swu with password U2FsdGVkX19deTfqpXHZnB5GeyQ/dtlbHjkUnwgCi+w=
 7) rename the zip file to update.swu
-8) create a folder on the usb stick called update
+8) create a folder on the usb stick called aGVscF9zb3Nf
 9) put the file update.swu in aGVscF9zb3Nf
 10) boot printer with the stick, depending on your current firmware version, either the printer will update and start bipping or you need to check for update in the printer information menu
 11) do the update
